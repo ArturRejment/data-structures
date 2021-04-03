@@ -56,7 +56,7 @@ public:
         (*head) = newNode;
     }
 
-    void pop_back(LinkedList **head)
+    static void pop_back(LinkedList **head)
     {
         LinkedList *temp = (*head);
         LinkedList *temp2 = NULL;
@@ -80,22 +80,23 @@ public:
         temp->next = NULL;
     }
 
-    LinkedList *getPlace(LinkedList **head, int pos)
+    static LinkedList *findElement(LinkedList **head, int val)
     {
 
         LinkedList *temp = (*head);
 
-        if (pos == 0)
-        {
-            LinkedList *nullPtr = NULL;
-            return nullPtr;
-        }
+        if (*head == nullptr)
+            return nullptr;
 
-        for (int i = 0; i < pos - 1; i++)
+        while (temp != nullptr)
         {
+            if (temp->data == val)
+            {
+                return temp;
+            }
             temp = temp->next;
         }
-        return temp;
+        return nullptr;
     }
 
     static void printList(LinkedList *head)

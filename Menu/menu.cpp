@@ -14,7 +14,8 @@ void printDefaultMenu()
     cout << "[3] Find element" << endl;
     cout << "[4] Print structure" << endl;
     cout << "[5] Fill structure with random values" << endl;
-    cout << "[6] Return" << endl;
+    cout << "[6] Fill structure with values from the file" << endl;
+    cout << "[7] Return" << endl;
 }
 
 void arrayMenu()
@@ -50,6 +51,19 @@ void listMenu()
         cin >> val;
         LinkedList::push_back(&head, val);
         break;
+    case '2':
+        LinkedList::pop_back(&head);
+        break;
+    case '3':
+        cout << "Enter value to find: ";
+        cin >> val;
+        LinkedList *elem;
+        elem = LinkedList::findElement(&head, val);
+        if (elem != nullptr)
+            elem->print();
+        else
+            cout << "Element " << val << " is not in the List" << endl;
+        break;
     case '4':
         LinkedList::printList(head);
         break;
@@ -57,9 +71,11 @@ void listMenu()
         fillLinkedListWithRandomData(head);
         break;
     case '6':
+        fillLinkedListFromFile(head);
+        break;
+    case '7':
         return;
         break;
-
     default:
         break;
     }
