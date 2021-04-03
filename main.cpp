@@ -1,6 +1,6 @@
 #include <iostream>
-#include "mainLogic.cpp"
-#include "menu.cpp"
+#include "Logic/mainLogic.cpp"
+#include "Menu/menu.cpp"
 using namespace std;
 
 int main()
