@@ -1,12 +1,11 @@
 #include <iostream>
 #include "mainLogic.cpp"
+#include "menu.cpp"
 using namespace std;
 
 int main()
 {
-    LinkedList *list = nullptr;
-    fillLinkedList(list);
-    list->printList(list);
+    printMenu();
 
     return 0;
 }
