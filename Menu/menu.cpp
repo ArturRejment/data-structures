@@ -1,13 +1,20 @@
 #include <iostream>
 #include <conio.h>
+#include "../List/linkedList.cpp"
+#include "../Logic/mainLogic.cpp"
 using namespace std;
+
+//* Structures Declaration
+LinkedList *head = nullptr;
 
 void printDefaultMenu()
 {
     cout << "[1] Add element" << endl;
     cout << "[2] Delete element" << endl;
     cout << "[3] Find element" << endl;
-    cout << "[4] Return" << endl;
+    cout << "[4] Print structure" << endl;
+    cout << "[5] Fill structure with random values" << endl;
+    cout << "[6] Return" << endl;
 }
 
 void arrayMenu()
@@ -34,10 +41,22 @@ void listMenu()
     printDefaultMenu();
 
     char choice = getch();
+    int val;
 
     switch (choice)
     {
+    case '1':
+        cout << "Enter value: ";
+        cin >> val;
+        LinkedList::push_back(&head, val);
+        break;
     case '4':
+        LinkedList::printList(head);
+        break;
+    case '5':
+        fillLinkedListWithRandomData(head);
+        break;
+    case '6':
         return;
         break;
 

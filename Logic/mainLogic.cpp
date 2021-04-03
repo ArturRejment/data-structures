@@ -1,10 +1,11 @@
 #include <fstream>
 #include <iostream>
-#include "./List/linkedList.cpp"
+#include <time.h>
+#include <stdlib.h>
 
 using namespace std;
 
-void fillLinkedList(LinkedList *&list)
+void fillLinkedListFromFile(LinkedList *&list)
 {
     fstream file;
     file.open("data.txt", ios::in);
@@ -22,5 +23,26 @@ void fillLinkedList(LinkedList *&list)
     {
         file >> data;
         list->push_back(&list, data);
+    }
+}
+
+void fillLinkedListWithRandomData(LinkedList *&list)
+{
+    srand(time(NULL));
+
+    if (list != nullptr)
+    {
+        cout << "List is not empty!";
+        return;
+    }
+
+    int size;
+    cout << "Enter the size of the list: " << flush;
+    cin >> size;
+
+    for (int i = 0; i < size; i++)
+    {
+        int value = rand() % 300;
+        LinkedList::push_back(&list, value);
     }
 }
