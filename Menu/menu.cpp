@@ -3,12 +3,14 @@
 #include "../Timer/timer.cpp"
 #include "../List/linkedList.cpp"
 #include "../Array/array.cpp"
+#include "../Heap/heap.cpp"
 #include "../Logic/mainLogic.cpp"
 using namespace std;
 
 //* Structures Declaration
 LinkedList *head = nullptr;
 Array array = Array();
+Heap heap = Heap();
 
 void printDefaultMenu()
 {
@@ -106,20 +108,32 @@ void listMenu()
 
 void heapMenu()
 {
-    cout << "------------- BINARY HEAP MENU -------------" << endl;
-    printDefaultMenu();
-
-    char choice = getch();
-
-    switch (choice)
+    do
     {
-    case '4':
-        return;
-        break;
+        cout << "------------- BINARY HEAP MENU -------------" << endl;
+        printDefaultMenu();
 
-    default:
-        break;
-    }
+        char choice = getch();
+        int val;
+
+        switch (choice)
+        {
+        case '1':
+            cout << "Enter value: ";
+            cin >> val;
+            heap.insert(val);
+            break;
+        case '4':
+            heap.printHeap();
+            break;
+        case '7':
+            return;
+            break;
+
+        default:
+            break;
+        }
+    } while (true);
 }
 
 void treeMenu()

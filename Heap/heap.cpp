@@ -3,6 +3,10 @@
 #include "heap.h"
 using namespace std;
 
+Heap::Heap()
+{
+}
+
 void Heap::printHeap()
 {
     for (auto val : heap)

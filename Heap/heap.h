@@ -11,6 +11,7 @@ private:
     int rightChild(int i) { return (i << 1) + 1; }; // i*2+1
 
 public:
+    Heap();
     bool isEmpty();
     int getMax();
     void insert(int value);
