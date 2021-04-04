@@ -22,79 +22,85 @@ void printDefaultMenu()
 
 void arrayMenu()
 {
-    cout << "------------- ARRAY MENU -------------" << endl;
-    printDefaultMenu();
-
-    char choice = getch();
-    int val;
-
-    switch (choice)
+    do
     {
-    case '1':
-        cout << "Enter value: ";
-        cin >> val;
-        array.addElement(val);
-        break;
-    case '2':
-        cout << "Enter value: ";
-        cin >> val;
-        array.deleteElement(val);
-        break;
-    case '4':
-        array.printArray();
-        break;
-    case '7':
-        return;
-        break;
+        cout << "------------- ARRAY MENU -------------" << endl;
+        printDefaultMenu();
 
-    default:
-        break;
-    }
+        char choice = getch();
+        int val;
+
+        switch (choice)
+        {
+        case '1':
+            cout << "Enter value: ";
+            cin >> val;
+            array.addElement(val);
+            break;
+        case '2':
+            cout << "Enter value: ";
+            cin >> val;
+            array.deleteElement(val);
+            break;
+        case '4':
+            array.printArray();
+            break;
+        case '7':
+            return;
+            break;
+
+        default:
+            break;
+        }
+    } while (true);
 }
 
 void listMenu()
 {
-    cout << "------------- LINKED LIST MENU -------------" << endl;
-    printDefaultMenu();
-
-    char choice = getch();
-    int val;
-
-    switch (choice)
+    do
     {
-    case '1':
-        cout << "Enter value: ";
-        cin >> val;
-        LinkedList::push_back(&head, val);
-        break;
-    case '2':
-        LinkedList::pop_back(&head);
-        break;
-    case '3':
-        cout << "Enter value to find: ";
-        cin >> val;
-        LinkedList *elem;
-        elem = LinkedList::findElement(&head, val);
-        if (elem != nullptr)
-            elem->print();
-        else
-            cout << "Element " << val << " is not in the List" << endl;
-        break;
-    case '4':
-        LinkedList::printList(head);
-        break;
-    case '5':
-        fillLinkedListWithRandomData(head);
-        break;
-    case '6':
-        fillLinkedListFromFile(head);
-        break;
-    case '7':
-        return;
-        break;
-    default:
-        break;
-    }
+        cout << "------------- LINKED LIST MENU -------------" << endl;
+        printDefaultMenu();
+
+        char choice = getch();
+        int val;
+
+        switch (choice)
+        {
+        case '1':
+            cout << "Enter value: ";
+            cin >> val;
+            LinkedList::push_back(&head, val);
+            break;
+        case '2':
+            LinkedList::pop_back(&head);
+            break;
+        case '3':
+            cout << "Enter value to find: ";
+            cin >> val;
+            LinkedList *elem;
+            elem = LinkedList::findElement(&head, val);
+            if (elem != nullptr)
+                elem->print();
+            else
+                cout << "Element " << val << " is not in the List" << endl;
+            break;
+        case '4':
+            LinkedList::printList(head);
+            break;
+        case '5':
+            fillLinkedListWithRandomData(head);
+            break;
+        case '6':
+            fillLinkedListFromFile(head);
+            break;
+        case '7':
+            return;
+            break;
+        default:
+            break;
+        }
+    } while (true);
 }
 
 void heapMenu()
@@ -138,6 +144,7 @@ void printMenu()
     do
     {
         char choice;
+        system("clear");
 
         cout << "------------- MENU -------------" << endl;
         cout << "[1] Array" << endl;
