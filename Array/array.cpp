@@ -31,3 +31,23 @@ void Array::printArray()
     }
     cout << endl;
 }
+
+void Array::deleteElement(int value)
+{
+    int position = -1;
+    for (int i = 0; i < size; i++)
+    {
+        if (array[i] == value)
+            position = i;
+    }
+
+    if (position == -1)
+        return;
+
+    for (int i = position; i < size; i++)
+    {
+        array[i] = array[i + 1];
+    }
+    size--;
+    array = (int *)realloc(array, size * sizeof(int));
+}

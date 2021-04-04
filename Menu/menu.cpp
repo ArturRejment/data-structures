@@ -34,8 +34,15 @@ void arrayMenu()
         cout << "Enter value: ";
         cin >> val;
         array.addElement(val);
+        break;
+    case '2':
+        cout << "Enter value: ";
+        cin >> val;
+        array.deleteElement(val);
+        break;
     case '4':
         array.printArray();
+        break;
     case '7':
         return;
         break;

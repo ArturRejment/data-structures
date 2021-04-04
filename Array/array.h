@@ -8,7 +8,7 @@ public:
     Array();
     ~Array();
     void addElement(int value);
-    void deleteElement();
+    void deleteElement(int value);
     void findElement();
     void printArray();
 };
