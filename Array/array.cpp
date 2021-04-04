@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
 #include "array.h"
-#include "../Timer/timer.cpp"
 
 using namespace std;
 
@@ -32,7 +31,7 @@ void Array::printArray()
     {
         cout << array[i] << " ";
     }
-    cout << endl;
+    cout << "\n";
 }
 
 void Array::deleteElement(int value)

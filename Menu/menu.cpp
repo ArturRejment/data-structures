@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include "../Timer/timer.cpp"
 #include "../List/linkedList.cpp"
 #include "../Array/array.cpp"
 #include "../Logic/mainLogic.cpp"
