@@ -1,11 +1,13 @@
 #include <iostream>
 #include <conio.h>
 #include "../List/linkedList.cpp"
+#include "../Array/array.cpp"
 #include "../Logic/mainLogic.cpp"
 using namespace std;
 
 //* Structures Declaration
 LinkedList *head = nullptr;
+Array array = Array();
 
 void printDefaultMenu()
 {
@@ -24,10 +26,17 @@ void arrayMenu()
     printDefaultMenu();
 
     char choice = getch();
+    int val;
 
     switch (choice)
     {
+    case '1':
+        cout << "Enter value: ";
+        cin >> val;
+        array.addElement(val);
     case '4':
+        array.printArray();
+    case '7':
         return;
         break;
 
