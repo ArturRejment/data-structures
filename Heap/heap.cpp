@@ -44,10 +44,10 @@ void Heap::shiftDown(int i)
 
     if (leftChild(i) <= size && heap[i] < heap[leftChild(i)])
     {
-        swapId = i;
+        swapId = leftChild(i);
     }
 
-    if (rightChild(i) <= size && heap[swapId < heap[rightChild(i)]])
+    if (rightChild(i) <= size && heap[swapId] < heap[rightChild(i)])
     {
         swapId = rightChild(i);
     }
