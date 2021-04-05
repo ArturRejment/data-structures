@@ -131,6 +131,106 @@ void RBTree::rightRotation(RBNode *rotatingNode)
     }
 }
 
+void RBTree::deleteElement(RBNode *nodeToDelete)
+{
+    RBNode *temp1, *temp2, *temp3;
+
+    if ((nodeToDelete->leftChild == nullptr) || (nodeToDelete->rightChild == nullptr))
+        temp2 = nodeToDelete;
+    else
+        temp2 = findSuccessor(nodeToDelete);
+
+    if (temp2->leftChild != nullptr)
+        temp3 = temp2->leftChild;
+    else
+        temp3 = temp2->rightChild;
+
+    temp3->parent = temp2->parent;
+
+    if (temp2->parent == nullptr)
+        root = temp3;
+    else if (temp2 == temp2->parent->leftChild)
+        temp2->parent->leftChild = temp3;
+    else
+        temp2->parent->rightChild = temp3;
+
+    if (temp2 != nodeToDelete)
+        nodeToDelete->data = temp2->data;
+
+    if (temp2->color == BLACK) // Naprawa struktury drzewa czerwono-czarnego
+        while ((temp3 != root) && (temp3->color == BLACK))
+            if (temp3 == temp3->parent->leftChild)
+            {
+                temp1 = temp3->parent->rightChild;
+
+                if (temp1->color == RED)
+                { // Przypadek 1
+                    temp1->color = BLACK;
+                    temp3->parent->color = RED;
+                    leftRotation(temp3->parent);
+                    temp1 = temp3->parent->rightChild;
+                }
+
+                if ((temp1->leftChild->color == BLACK) && (temp1->rightChild->color == BLACK))
+                { // Przypadek 2
+                    temp1->color = RED;
+                    temp3 = temp3->parent;
+                    continue;
+                }
+
+                if (temp1->rightChild->color == BLACK)
+                { // Przypadek 3
+                    temp1->leftChild->color = BLACK;
+                    temp1->color = RED;
+                    rightRotation(temp1);
+                    temp1 = temp3->parent->rightChild;
+                }
+
+                temp1->color = temp3->parent->color; // Przypadek 4
+                temp3->parent->color = BLACK;
+                temp1->rightChild->color = BLACK;
+                leftRotation(temp3->parent);
+                temp3 = root; // To spowoduje zakończenie pętli
+            }
+            else
+            { // Przypadki lustrzane
+                temp1 = temp3->parent->leftChild;
+
+                if (temp1->color == RED)
+                { // Przypadek 1
+                    temp1->color = BLACK;
+                    temp3->parent->color = RED;
+                    rightRotation(temp3->parent);
+                    temp1 = temp3->parent->leftChild;
+                }
+
+                if ((temp1->leftChild->color == BLACK) && (temp1->rightChild->color == BLACK))
+                { // Przypadek 2
+                    temp1->color = RED;
+                    temp3 = temp3->parent;
+                    continue;
+                }
+
+                if (temp1->leftChild->color == BLACK)
+                { // Przypadek 3
+                    temp1->rightChild->color = BLACK;
+                    temp1->color = RED;
+                    leftRotation(temp1);
+                    temp1 = temp3->parent->leftChild;
+                }
+
+                temp1->color = temp3->parent->color; // Przypadek 4
+                temp3->parent->color = BLACK;
+                temp1->leftChild->color = BLACK;
+                rightRotation(temp3->parent);
+                temp3 = root; // To spowoduje zakończenie pętli
+            }
+
+    temp3->color = BLACK;
+
+    delete temp2;
+}
+
 void RBTree::insertElement(int value)
 {
     RBNode *newNode, *uncle;
