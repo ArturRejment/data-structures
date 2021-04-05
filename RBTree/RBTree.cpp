@@ -78,3 +78,55 @@ RBNode *RBTree::findSuccessor(RBNode *node)
     }
     return nullptr;
 }
+
+void RBTree::leftRotation(RBNode *rotatingNode)
+{
+    RBNode *rightChildOfRotatingNode = rotatingNode->rightChild, *tempParent = rotatingNode->parent;
+
+    if (rightChildOfRotatingNode)
+    {
+        rotatingNode->rightChild = rightChildOfRotatingNode->leftChild;
+        if (rotatingNode->rightChild)
+            rotatingNode->rightChild->parent = rotatingNode;
+
+        rightChildOfRotatingNode->leftChild = rotatingNode;
+        rightChildOfRotatingNode->parent = tempParent;
+        rotatingNode->parent = rightChildOfRotatingNode;
+
+        if (tempParent)
+        {
+            if (tempParent->leftChild == rotatingNode)
+                tempParent->leftChild = rightChildOfRotatingNode;
+            else
+                tempParent->rightChild = rightChildOfRotatingNode;
+        }
+        else
+            root = rightChildOfRotatingNode;
+    }
+}
+
+void RBTree::rightRotation(RBNode *rotatingNode)
+{
+    RBNode *leftOfRotatingNode = rotatingNode->leftChild, *tempParent = rotatingNode->parent;
+
+    if (leftOfRotatingNode)
+    {
+        rotatingNode->leftChild = leftOfRotatingNode->rightChild;
+        if (rotatingNode->leftChild)
+            rotatingNode->leftChild->parent = rotatingNode;
+
+        leftOfRotatingNode->rightChild = rotatingNode;
+        leftOfRotatingNode->parent = tempParent;
+        rotatingNode->parent = leftOfRotatingNode;
+
+        if (tempParent)
+        {
+            if (tempParent->leftChild == rotatingNode)
+                tempParent->leftChild = leftOfRotatingNode;
+            else
+                tempParent->rightChild = leftOfRotatingNode;
+        }
+        else
+            root = leftOfRotatingNode;
+    }
+}
