@@ -130,3 +130,92 @@ void RBTree::rightRotation(RBNode *rotatingNode)
             root = leftOfRotatingNode;
     }
 }
+
+void RBTree::insertElement(int value)
+{
+    RBNode *newNode, *uncle;
+
+    newNode = new RBNode(value);
+
+    if (newNode->parent == nullptr)
+        root = newNode;
+
+    else
+    {
+        while (true)
+        {
+            if (value < newNode->parent->data)
+            {
+                if (newNode->parent->leftChild == nullptr)
+                {
+                    newNode->parent->leftChild = newNode;
+                    break;
+                }
+                newNode->parent = newNode->parent->leftChild;
+            }
+            else
+            {
+                if (newNode->parent->rightChild == nullptr)
+                {
+                    newNode->parent->rightChild = newNode;
+                    break;
+                }
+                newNode->parent = newNode->parent->rightChild;
+            }
+        }
+
+        newNode->color = true;
+        while ((newNode != root) && (newNode->parent->color == true))
+        {
+            if (newNode->parent == newNode->parent->parent->leftChild)
+            {
+                uncle = newNode->parent->parent->rightChild;
+
+                if (uncle->color == true) // First case
+                {
+                    newNode->parent->color = BLACK;
+                    uncle->color = BLACK;
+                    newNode->parent->parent->color = BLACK;
+                    newNode = newNode->parent->parent;
+                    continue;
+                }
+
+                if (newNode == newNode->parent->rightChild) // Second case
+                {
+                    newNode = newNode->parent;
+                    leftRotation(newNode);
+                }
+
+                newNode->parent->color = BLACK; // Third case
+                newNode->parent->parent->color = RED;
+                rightRotation(newNode->parent->parent);
+                break;
+            }
+            else // Mirror cases
+            {
+                uncle = newNode->parent->parent->leftChild;
+
+                if (uncle->color == true)
+                {
+                    newNode->parent->color = BLACK;
+                    uncle->color = BLACK;
+                    newNode->parent->parent->color = RED;
+                    newNode = newNode->parent->parent;
+                    continue;
+                }
+
+                if (newNode == newNode->parent->leftChild)
+                {
+                    newNode = newNode->parent;
+                    rightRotation(newNode);
+                }
+
+                newNode->parent->color = BLACK;
+                newNode->parent->parent->color = RED;
+                leftRotation(newNode->parent->parent);
+                break;
+            }
+        }
+        root->color = BLACK;
+    }
+}
