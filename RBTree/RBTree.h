@@ -38,4 +38,5 @@ public:
     void rightRotation(RBNode *node);
     void insertElement(int value);
     void deleteElement(RBNode *nodeToDelete);
+    void deleteTree(RBNode *node);
 };
