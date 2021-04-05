@@ -26,14 +26,18 @@ class RBTree
 {
 private:
     RBNode *root;
+    string cr, cl, cp;
 
 public:
     RBTree();
     ~RBTree();
-    void printTree();
+    void print();
+    void printTree(string, string, RBNode *);
+    void inorder();
     RBNode *find(int k);
     RBNode *findMin(RBNode *node);
     RBNode *findSuccessor(RBNode *node);
+    RBNode *getRoot();
     void leftRotation(RBNode *node);
     void rightRotation(RBNode *node);
     void insertElement(int value);

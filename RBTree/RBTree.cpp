@@ -4,12 +4,28 @@ using namespace std;
 
 RBTree ::RBTree()
 {
+    cr = cl = cp = "  ";
+    cr[0] = 218;
+    cr[1] = 196;
+    cl[0] = 192;
+    cl[1] = 196;
+    cp[0] = 179;
     root = nullptr;
+}
+
+void RBTree::print()
+{
+    printTree("", "", root);
 }
 
 RBTree ::~RBTree()
 {
     deleteTree(root);
+}
+
+RBNode *RBTree::getRoot()
+{
+    return this->root;
 }
 
 void RBTree ::deleteTree(RBNode *node)
@@ -318,4 +334,41 @@ void RBTree::insertElement(int value)
         }
         root->color = BLACK;
     }
+}
+
+void RBTree::printTree(string sp, string sn, RBNode *node)
+{
+
+    string text;
+
+    if (node != nullptr)
+    {
+        text = sp;
+        if (sn == cr)
+            text[text.length() - 2] = ' ';
+        printTree(text + cp, cr, node->rightChild);
+
+        text = text.substr(0, sp.length() - 2);
+        cout << text << sn << node->color << ":" << node->data << endl;
+
+        text = sp;
+        if (sn == cl)
+            text[text.length() - 2] = ' ';
+        printTree(text + cp, cl, node->leftChild);
+    }
+}
+
+void inorderH(RBNode *root)
+{
+    if (root == nullptr)
+        return;
+
+    inorderH(root->leftChild);
+    cout << root->data << " ";
+    inorderH(root->rightChild);
+}
+
+void RBTree::inorder()
+{
+    inorderH(root);
 }

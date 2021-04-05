@@ -4,6 +4,7 @@
 #include "../List/linkedList.cpp"
 #include "../Array/array.cpp"
 #include "../Heap/heap.cpp"
+#include "../RBTree/RBTree.cpp"
 #include "../Logic/mainLogic.cpp"
 using namespace std;
 
@@ -11,6 +12,7 @@ using namespace std;
 LinkedList *head = nullptr;
 Array array = Array();
 Heap heap = Heap();
+RBTree tree = RBTree();
 
 void printDefaultMenu()
 {
@@ -138,20 +140,46 @@ void heapMenu()
 
 void treeMenu()
 {
-    cout << "------------- RED-BLACK TREE MENU -------------" << endl;
-    printDefaultMenu();
-
-    char choice = getch();
-
-    switch (choice)
+    do
     {
-    case '4':
-        return;
-        break;
+        cout << "------------- RED-BLACK TREE MENU -------------" << endl;
+        printDefaultMenu();
 
-    default:
-        break;
-    }
+        char choice = getch();
+        int val;
+
+        switch (choice)
+        {
+        case '1':
+            cout << "Enter value: ";
+            cin >> val;
+            tree.insertElement(val);
+            break;
+        case '2':
+            cout << "Enter value: ";
+            cin >> val;
+            tree.deleteElement(tree.find(val));
+            break;
+        case '3':
+            cout << "Enter value: ";
+            cin >> val;
+            RBNode *temp;
+            temp = tree.find(val);
+            if (temp != nullptr)
+                cout << "Found " << val;
+            else
+                cout << "Element " << val << " is not in the structure\n";
+            break;
+        case '4':
+            tree.inorder();
+            break;
+        case '7':
+            return;
+
+        default:
+            break;
+        }
+    } while (true);
 }
 
 void printMenu()
