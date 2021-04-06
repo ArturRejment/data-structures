@@ -41,6 +41,8 @@ public:
     void leftRotation(RBNode *node);
     void rightRotation(RBNode *node);
     void insertElement(int value);
+    RBNode *insertElementNormalBST(RBNode *root, RBNode *node);
+    void restoreRBTreeProperties(RBNode *node);
     void deleteElement(RBNode *nodeToDelete);
     void deleteTree(RBNode *node);
 };
