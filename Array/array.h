@@ -11,4 +11,5 @@ public:
     void deleteElement(int value);
     void findElement();
     void printArray();
+    int getSize();
 };

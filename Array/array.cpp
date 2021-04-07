@@ -15,9 +15,13 @@ Array::~Array()
     return;
 }
 
+int Array::getSize()
+{
+    return this->size;
+}
+
 void Array::addElement(int value)
 {
-    Timer timer;
     size++;
     array = (int *)realloc(array, size * sizeof(int));
     array[size - 1] = value;
@@ -25,7 +29,6 @@ void Array::addElement(int value)
 
 void Array::printArray()
 {
-    Timer timer;
     cout << "Array: ";
     for (int i = 0; i < size; i++)
     {
@@ -36,7 +39,6 @@ void Array::printArray()
 
 void Array::deleteElement(int value)
 {
-    Timer timer;
     int position = -1;
     for (int i = 0; i < size; i++)
     {

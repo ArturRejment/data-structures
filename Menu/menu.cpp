@@ -48,6 +48,9 @@ void arrayMenu()
         case '4':
             array.printArray();
             break;
+        case '5':
+            fillArrayWithRandomData(&array);
+            break;
         case '7':
             return;
             break;
