@@ -1,9 +1,8 @@
 #include <iostream>
 #include <conio.h>
-#include "../List/linkedList.cpp"
+#include "../List/listLogic.cpp"
 #include "../Array/arrayLogic.cpp"
 #include "../Heap/heap.cpp"
-#include "../Logic/mainLogic.cpp"
 using namespace std;
 
 //* Structures Declaration

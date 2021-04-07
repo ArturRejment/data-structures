@@ -1,5 +1,4 @@
 #include <iostream>
-#include "../Timer/timer.cpp"
 #include "array.cpp"
 
 void fillArrayWithRandomData(Array *array)
