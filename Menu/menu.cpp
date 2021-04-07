@@ -1,8 +1,7 @@
 #include <iostream>
 #include <conio.h>
-#include "../Timer/timer.cpp"
 #include "../List/linkedList.cpp"
-#include "../Array/array.cpp"
+#include "../Array/arrayLogic.cpp"
 #include "../Heap/heap.cpp"
 #include "../Logic/mainLogic.cpp"
 using namespace std;
