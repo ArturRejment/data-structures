@@ -40,9 +40,17 @@ void fillLinkedListWithRandomData(LinkedList *&list)
     cout << "Enter the size of the list: " << flush;
     cin >> size;
 
+    float time = 0;
+
     for (int i = 0; i < size; i++)
     {
         int value = rand() % 300;
+        Timer timer;
         LinkedList::push_back(&list, value);
+        time += timer.getTime().count() * 1000.0f;
     }
+
+    float avgTime = time / size;
+
+    cout << "Average time: " << avgTime << "\n";
 }

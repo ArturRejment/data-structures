@@ -13,9 +13,13 @@ struct Timer
 
     ~Timer()
     {
+        //std::cout << "Timer took " << duration.count() * 1000.0f << " ms\n";
+    }
+
+    std::chrono::duration<float> getTime()
+    {
         end = std::chrono::high_resolution_clock::now();
         duration = end - start;
-
-        std::cout << "Timer took " << duration.count() * 1000.0f << " ms\n";
+        return duration;
     }
 };

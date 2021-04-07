@@ -24,7 +24,6 @@ public:
 
     static void push_back(LinkedList **head, int data)
     {
-        Timer timer;
         LinkedList *newNode = new LinkedList(data);
         LinkedList *temp = (*head);
         LinkedList *temp2 = nullptr;
