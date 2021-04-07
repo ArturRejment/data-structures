@@ -30,9 +30,11 @@ void arrayMenu()
         printDefaultMenu();
         cout << "[8] Add element on a position\n";
         cout << "[9] Add element at the beginning\n";
+        cout << "[a] Delete array\n";
 
         char choice = getch();
         int val;
+        int pos;
 
         switch (choice)
         {
@@ -55,12 +57,17 @@ void arrayMenu()
         case '8':
             cout << "Enter value: ";
             cin >> val;
-            array.addElementOnPosition(val);
+            cout << "Enter position: ";
+            cin >> pos;
+            array.addElementOnPosition(val, pos);
             break;
         case '9':
             cout << "Enter value: ";
             cin >> val;
             array.addElementAtTheBegenning(val);
+            break;
+        case 'a':
+            deleteArray(&array);
             break;
         case '7':
             return;
