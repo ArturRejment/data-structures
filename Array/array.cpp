@@ -27,6 +27,40 @@ void Array::addElement(int value)
     array[size - 1] = value;
 }
 
+void Array::addElementOnPosition(int value)
+{
+    cout << "At what position?: " << flush;
+    int position;
+    cin >> position;
+    position++;
+
+    if (position > size || position < 0)
+    {
+        return;
+    }
+
+    size++;
+    array = (int *)realloc(array, size * sizeof(int));
+    int i;
+    for (i = size; i >= position; i--)
+    {
+        array[i] = array[i - 1];
+    }
+    array[i] = value;
+}
+
+void Array::addElementAtTheBegenning(int value)
+{
+    size++;
+    array = (int *)realloc(array, size * sizeof(int));
+    int i;
+    for (i = size; i >= 1; i--)
+    {
+        array[i] = array[i - 1];
+    }
+    array[i] = value;
+}
+
 void Array::printArray()
 {
     cout << "Array: ";
