@@ -137,6 +137,11 @@ void heapMenu()
             cin >> val;
             heap.insert(val);
             break;
+        case '2':
+            cout << "Enter value: ";
+            cin >> val;
+            heap.deleteElement(val);
+            break;
         case '6':
             heap.printHeap();
             break;
