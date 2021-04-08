@@ -29,7 +29,7 @@ void Heap::findElement(int value)
     {
         if (heap[i] == value)
         {
-            cout << "Found " << value << " in heap\n";
+            cout << "Found " << value << " in the heap\n";
             return;
         }
     }

@@ -15,6 +15,19 @@ Array::~Array()
     return;
 }
 
+void Array::findElement(int value)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (array[i] == value)
+        {
+            cout << "Found " << value << " in the array\n";
+            return;
+        }
+    }
+    cout << value << " is not in the array\n";
+}
+
 int Array::getSize()
 {
     return this->size;

@@ -56,6 +56,12 @@ void arrayMenu()
         case '3':
             fillArrayWithRandomData(&array);
             break;
+        case '4':
+            fillArrayFromFile(&array);
+            break;
+        case '5':
+            array.findElement(askForValue());
+            break;
         case '6':
             array.printArray();
             break;
