@@ -86,30 +86,30 @@ RBNode *RBTree::findSuccessor(RBNode *node)
     return nullptr;
 }
 
-void RBTree::leftRotation(RBNode *A)
+void RBTree::leftRotation(RBNode *rotatingNode)
 {
-    // RBNode *rightChildOfRotatingNode = rotatingNode->rightChild, *tempParent = rotatingNode->parent;
+    RBNode *rightChildOfRotatingNode = rotatingNode->rightChild, *tempParent = rotatingNode->parent;
 
-    // if (rightChildOfRotatingNode)
-    // {
-    //     rotatingNode->rightChild = rightChildOfRotatingNode->leftChild;
-    //     if (rotatingNode->rightChild)
-    //         rotatingNode->rightChild->parent = rotatingNode;
+    if (rightChildOfRotatingNode)
+    {
+        rotatingNode->rightChild = rightChildOfRotatingNode->leftChild;
+        if (rotatingNode->rightChild)
+            rotatingNode->rightChild->parent = rotatingNode;
 
-    //     rightChildOfRotatingNode->leftChild = rotatingNode;
-    //     rightChildOfRotatingNode->parent = tempParent;
-    //     rotatingNode->parent = rightChildOfRotatingNode;
+        rightChildOfRotatingNode->leftChild = rotatingNode;
+        rightChildOfRotatingNode->parent = tempParent;
+        rotatingNode->parent = rightChildOfRotatingNode;
 
-    //     if (tempParent)
-    //     {
-    //         if (tempParent->leftChild == rotatingNode)
-    //             tempParent->leftChild = rightChildOfRotatingNode;
-    //         else
-    //             tempParent->rightChild = rightChildOfRotatingNode;
-    //     }
-    //     else
-    //         root = rightChildOfRotatingNode;
-    // }
+        if (tempParent)
+        {
+            if (tempParent->leftChild == rotatingNode)
+                tempParent->leftChild = rightChildOfRotatingNode;
+            else
+                tempParent->rightChild = rightChildOfRotatingNode;
+        }
+        else
+            root = rightChildOfRotatingNode;
+    }
 
     // RBNode *right = rotatingNode->rightChild;
     // rotatingNode->rightChild = right->leftChild;
@@ -129,56 +129,56 @@ void RBTree::leftRotation(RBNode *A)
     // right->leftChild = rotatingNode;
     // rotatingNode->parent = right;
 
-    RBNode *B, *p;
+    // RBNode *B, *p;
 
-    B = A->rightChild;
-    if (B != nullptr)
-    {
-        p = A->parent;
-        A->rightChild = B->leftChild;
-        if (A->rightChild != nullptr)
-            A->rightChild->parent = A;
-
-        B->leftChild = A;
-        B->parent = p;
-        A->parent = B;
-
-        if (p != nullptr)
-        {
-            if (p->leftChild == A)
-                p->leftChild = B;
-            else
-                p->rightChild = B;
-        }
-        else
-            root = B;
-    }
-}
-
-void RBTree::rightRotation(RBNode *A)
-{
-    // RBNode *leftOfRotatingNode = rotatingNode->leftChild, *tempParent = rotatingNode->parent;
-
-    // if (leftOfRotatingNode)
+    // B = A->rightChild;
+    // if (B != nullptr)
     // {
-    //     rotatingNode->leftChild = leftOfRotatingNode->rightChild;
-    //     if (rotatingNode->leftChild)
-    //         rotatingNode->leftChild->parent = rotatingNode;
+    //     p = A->parent;
+    //     A->rightChild = B->leftChild;
+    //     if (A->rightChild != nullptr)
+    //         A->rightChild->parent = A;
 
-    //     leftOfRotatingNode->rightChild = rotatingNode;
-    //     leftOfRotatingNode->parent = tempParent;
-    //     rotatingNode->parent = leftOfRotatingNode;
+    //     B->leftChild = A;
+    //     B->parent = p;
+    //     A->parent = B;
 
-    //     if (tempParent)
+    //     if (p != nullptr)
     //     {
-    //         if (tempParent->leftChild == rotatingNode)
-    //             tempParent->leftChild = leftOfRotatingNode;
+    //         if (p->leftChild == A)
+    //             p->leftChild = B;
     //         else
-    //             tempParent->rightChild = leftOfRotatingNode;
+    //             p->rightChild = B;
     //     }
     //     else
-    //         root = leftOfRotatingNode;
+    //         root = B;
     // }
+}
+
+void RBTree::rightRotation(RBNode *rotatingNode)
+{
+    RBNode *leftOfRotatingNode = rotatingNode->leftChild, *tempParent = rotatingNode->parent;
+
+    if (leftOfRotatingNode)
+    {
+        rotatingNode->leftChild = leftOfRotatingNode->rightChild;
+        if (rotatingNode->leftChild)
+            rotatingNode->leftChild->parent = rotatingNode;
+
+        leftOfRotatingNode->rightChild = rotatingNode;
+        leftOfRotatingNode->parent = tempParent;
+        rotatingNode->parent = leftOfRotatingNode;
+
+        if (tempParent)
+        {
+            if (tempParent->leftChild == rotatingNode)
+                tempParent->leftChild = leftOfRotatingNode;
+            else
+                tempParent->rightChild = leftOfRotatingNode;
+        }
+        else
+            root = leftOfRotatingNode;
+    }
 
     // RBNode *left = rotatingNode->leftChild;
     // rotatingNode->leftChild = left->rightChild;
@@ -198,30 +198,30 @@ void RBTree::rightRotation(RBNode *A)
     // left->rightChild = rotatingNode;
     // rotatingNode->parent = left;
 
-    RBNode *B, *p;
+    // RBNode *B, *p;
 
-    B = A->leftChild;
-    if (B != nullptr)
-    {
-        p = A->parent;
-        A->leftChild = B->rightChild;
-        if (A->leftChild != nullptr)
-            A->leftChild->parent = A;
+    // B = A->leftChild;
+    // if (B != nullptr)
+    // {
+    //     p = A->parent;
+    //     A->leftChild = B->rightChild;
+    //     if (A->leftChild != nullptr)
+    //         A->leftChild->parent = A;
 
-        B->rightChild = A;
-        B->parent = p;
-        A->parent = B;
+    //     B->rightChild = A;
+    //     B->parent = p;
+    //     A->parent = B;
 
-        if (p != nullptr)
-        {
-            if (p->leftChild == A)
-                p->leftChild = B;
-            else
-                p->rightChild = B;
-        }
-        else
-            root = B;
-    }
+    //     if (p != nullptr)
+    //     {
+    //         if (p->leftChild == A)
+    //             p->leftChild = B;
+    //         else
+    //             p->rightChild = B;
+    //     }
+    //     else
+    //         root = B;
+    // }
 }
 
 void RBTree::deleteElement(RBNode *nodeToDelete)
@@ -324,110 +324,110 @@ void RBTree::deleteElement(RBNode *nodeToDelete)
     delete temp2;
 }
 
-void RBTree::insertElement(int value)
-{
-    RBNode *newNode, *uncle;
-
-    newNode = new RBNode(value);
-    newNode->parent = root;
-
-    if (newNode->parent == nullptr)
-        root = newNode;
-
-    else
-
-        while (true)
-        {
-            if (value < newNode->parent->data)
-            {
-                if (newNode->parent->leftChild == nullptr)
-                {
-                    newNode->parent->leftChild = newNode;
-                    break;
-                }
-                newNode->parent = newNode->parent->leftChild;
-            }
-            else
-            {
-                if (newNode->parent->rightChild == nullptr)
-                {
-                    newNode->parent->rightChild = newNode;
-                    break;
-                }
-                newNode->parent = newNode->parent->rightChild;
-            }
-        }
-
-    newNode->color = RED;
-    while ((newNode != root) && (newNode->parent->color == RED))
-    {
-        if (newNode->parent == newNode->parent->parent->leftChild)
-        {
-            uncle = newNode->parent->parent->rightChild;
-
-            if (uncle->color == RED) // First case
-            {
-                newNode->parent->color = BLACK;
-                uncle->color = BLACK;
-                newNode->parent->parent->color = RED;
-                newNode = newNode->parent->parent;
-                continue;
-            }
-
-            if (newNode == newNode->parent->rightChild) // Second case
-            {
-                newNode = newNode->parent;
-                leftRotation(newNode);
-            }
-
-            newNode->parent->color = BLACK; // Third case
-            newNode->parent->parent->color = RED;
-            rightRotation(newNode->parent->parent);
-            break;
-        }
-        else // Mirror cases
-        {
-            uncle = newNode->parent->parent->leftChild;
-
-            if (uncle->color == RED)
-            {
-                newNode->parent->color = BLACK;
-                uncle->color = BLACK;
-                newNode->parent->parent->color = RED;
-                newNode = newNode->parent->parent;
-                continue;
-            }
-
-            if (newNode == newNode->parent->leftChild)
-            {
-                newNode = newNode->parent;
-                rightRotation(newNode);
-            }
-
-            newNode->parent->color = BLACK;
-            newNode->parent->parent->color = RED;
-            leftRotation(newNode->parent->parent);
-            break;
-        }
-    }
-    root->color = BLACK;
-}
-
 // void RBTree::insertElement(int value)
 // {
-//     RBNode *newNode = new RBNode(value);
+//     RBNode *newNode, *uncle;
 
-//     root = insertElementNormalBST(root, newNode);
+//     newNode = new RBNode(value);
+//     newNode->parent = root;
 
-//     restoreRBTreeProperties(newNode);
+//     if (newNode->parent == nullptr)
+//         root = newNode;
+
+//     else
+
+//         while (true)
+//         {
+//             if (value < newNode->parent->data)
+//             {
+//                 if (newNode->parent->leftChild == nullptr)
+//                 {
+//                     newNode->parent->leftChild = newNode;
+//                     break;
+//                 }
+//                 newNode->parent = newNode->parent->leftChild;
+//             }
+//             else
+//             {
+//                 if (newNode->parent->rightChild == nullptr)
+//                 {
+//                     newNode->parent->rightChild = newNode;
+//                     break;
+//                 }
+//                 newNode->parent = newNode->parent->rightChild;
+//             }
+//         }
+
+//     newNode->color = RED;
+//     while ((newNode != root) && (newNode->parent->color == RED))
+//     {
+//         if (newNode->parent == newNode->parent->parent->leftChild)
+//         {
+//             uncle = newNode->parent->parent->rightChild;
+
+//             if (uncle->color == RED) // First case
+//             {
+//                 newNode->parent->color = BLACK;
+//                 uncle->color = BLACK;
+//                 newNode->parent->parent->color = RED;
+//                 newNode = newNode->parent->parent;
+//                 continue;
+//             }
+
+//             if (newNode == newNode->parent->rightChild) // Second case
+//             {
+//                 newNode = newNode->parent;
+//                 leftRotation(newNode);
+//             }
+
+//             newNode->parent->color = BLACK; // Third case
+//             newNode->parent->parent->color = RED;
+//             rightRotation(newNode->parent->parent);
+//             break;
+//         }
+//         else // Mirror cases
+//         {
+//             uncle = newNode->parent->parent->leftChild;
+
+//             if (uncle->color == RED)
+//             {
+//                 newNode->parent->color = BLACK;
+//                 uncle->color = BLACK;
+//                 newNode->parent->parent->color = RED;
+//                 newNode = newNode->parent->parent;
+//                 continue;
+//             }
+
+//             if (newNode == newNode->parent->leftChild)
+//             {
+//                 newNode = newNode->parent;
+//                 rightRotation(newNode);
+//             }
+
+//             newNode->parent->color = BLACK;
+//             newNode->parent->parent->color = RED;
+//             leftRotation(newNode->parent->parent);
+//             break;
+//         }
+//     }
+//     root->color = BLACK;
 // }
+
+void RBTree::insertElement(int value)
+{
+    RBNode *newNode = new RBNode(value);
+
+    root = insertElementNormalBST(root, newNode);
+
+    restoreRBTreeProperties(newNode);
+}
 
 RBNode *RBTree::insertElementNormalBST(RBNode *rootB, RBNode *newNode)
 {
     if (rootB == nullptr)
         return newNode;
 
-    if (newNode->data < rootB->data)
+    if (newNode->data <= rootB->data)
     {
         rootB->leftChild = insertElementNormalBST(rootB->leftChild, newNode);
         rootB->leftChild->parent = rootB;
