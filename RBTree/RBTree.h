@@ -7,7 +7,7 @@ enum Color
 struct RBNode
 {
     int data;
-    bool color;
+    Color color;
     RBNode *leftChild;
     RBNode *rightChild;
     RBNode *parent;
@@ -26,14 +26,12 @@ class RBTree
 {
 private:
     RBNode *root;
-    string cr, cl, cp;
 
 public:
     RBTree();
-    ~RBTree();
     void print();
-    void printTree(string, string, RBNode *);
     void inorder();
+    bool isEmpty();
     RBNode *find(int k);
     RBNode *findMin(RBNode *node);
     RBNode *findSuccessor(RBNode *node);
@@ -42,7 +40,7 @@ public:
     void rightRotation(RBNode *node);
     void insertElement(int value);
     RBNode *insertElementNormalBST(RBNode *root, RBNode *node);
-    void restoreRBTreeProperties(RBNode *node);
+    void restoreRBTreeProperties(RBNode *&node);
     void deleteElement(RBNode *nodeToDelete);
     void deleteTree(RBNode *node);
 };

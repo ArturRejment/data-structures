@@ -3,7 +3,7 @@
 #include "../List/listLogic.cpp"
 #include "../Array/arrayLogic.cpp"
 #include "../Heap/heapLogic.cpp"
-#include "../RBTree/RBTree.cpp"
+#include "../RBTree/RBTreeLogic.cpp"
 #include "../Logic/mainLogic.cpp"
 using namespace std;
 
@@ -186,6 +186,12 @@ void treeMenu()
         case '2':
             tree.deleteElement(tree.find(askForValue()));
             break;
+        case '3':
+            fillTreeWithRandomData(&tree);
+            break;
+        case '4':
+            fillTreeFromFile(&tree);
+            break;
         case '5':
             RBNode *temp;
             temp = tree.find(askForValue());
@@ -196,6 +202,9 @@ void treeMenu()
             break;
         case '6':
             tree.inorder();
+            break;
+        case '7':
+            deleteTree(&tree);
             break;
         case '8':
             return;
