@@ -1,111 +1,102 @@
 #include <iostream>
+#include "linkedList.h"
 using namespace std;
 
-class LinkedList
+LinkedList::LinkedList(int data)
 {
+    this->data = data;
+    next = nullptr;
+    prev = nullptr;
+}
 
-private:
-    int data;
-    LinkedList *prev;
-    LinkedList *next;
+void LinkedList::print()
+{
+    cout << data << " ";
+}
 
-public:
-    LinkedList(int data)
+void LinkedList::push_back(LinkedList **head, int data)
+{
+    LinkedList *newNode = new LinkedList(data);
+    LinkedList *temp = (*head);
+    LinkedList *temp2 = nullptr;
+
+    while (temp != nullptr)
     {
-        this->data = data;
-        next = nullptr;
-        prev = nullptr;
+        temp2 = temp;
+        temp = temp->next;
     }
 
-    void print()
+    if ((*head) == nullptr)
     {
-        cout << data << " ";
-    }
-
-    static void push_back(LinkedList **head, int data)
-    {
-        LinkedList *newNode = new LinkedList(data);
-        LinkedList *temp = (*head);
-        LinkedList *temp2 = nullptr;
-
-        while (temp != nullptr)
-        {
-            temp2 = temp;
-            temp = temp->next;
-        }
-
-        if ((*head) == nullptr)
-        {
-            (*head) = newNode;
-        }
-        else
-        {
-            temp2->next = newNode;
-            newNode->prev = temp2;
-            newNode->next = nullptr;
-        }
-    }
-
-    void push_front(LinkedList **head, int data)
-    {
-        LinkedList *newNode = new LinkedList(data);
-        newNode->prev = nullptr;
-        newNode->next = (*head);
-        if ((*head) != nullptr)
-            (*head)->prev = newNode;
         (*head) = newNode;
     }
-
-    static void pop_back(LinkedList **head)
+    else
     {
-        LinkedList *temp = (*head);
-        LinkedList *temp2 = NULL;
+        temp2->next = newNode;
+        newNode->prev = temp2;
+        newNode->next = nullptr;
+    }
+}
 
-        if ((*head) == NULL)
-        {
-            return;
-        }
+void LinkedList::push_front(LinkedList **head, int data)
+{
+    LinkedList *newNode = new LinkedList(data);
+    newNode->prev = nullptr;
+    newNode->next = (*head);
+    if ((*head) != nullptr)
+        (*head)->prev = newNode;
+    (*head) = newNode;
+}
 
-        if ((*head)->next == NULL)
-        {
-            *head = NULL;
-            return;
-        }
+void LinkedList::pop_back(LinkedList **head)
+{
+    LinkedList *temp = (*head);
+    LinkedList *temp2 = NULL;
 
-        while (temp->next->next != NULL)
-        {
-            temp = temp->next;
-        }
-        free(temp->next);
-        temp->next = NULL;
+    if ((*head) == NULL)
+    {
+        return;
     }
 
-    static LinkedList *findElement(LinkedList **head, int val)
+    if ((*head)->next == NULL)
     {
+        *head = NULL;
+        return;
+    }
 
-        LinkedList *temp = (*head);
+    while (temp->next->next != NULL)
+    {
+        temp = temp->next;
+    }
+    free(temp->next);
+    temp->next = NULL;
+}
 
-        if (*head == nullptr)
-            return nullptr;
+LinkedList *LinkedList::findElement(LinkedList **head, int val)
+{
 
-        while (temp != nullptr)
-        {
-            if (temp->data == val)
-            {
-                return temp;
-            }
-            temp = temp->next;
-        }
+    LinkedList *temp = (*head);
+
+    if (*head == nullptr)
         return nullptr;
-    }
 
-    static void printList(LinkedList *head)
+    while (temp != nullptr)
     {
-        cout << "Linked list: " << flush;
-        while (head != NULL)
+        if (temp->data == val)
         {
-            head->print();
-            head = head->next;
+            return temp;
         }
+        temp = temp->next;
     }
-};
+    return nullptr;
+}
+
+void LinkedList::printList(LinkedList *head)
+{
+    cout << "Linked list: " << flush;
+    while (head != NULL)
+    {
+        head->print();
+        head = head->next;
+    }
+}
