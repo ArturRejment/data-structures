@@ -3,15 +3,12 @@
 #include "../List/listLogic.cpp"
 #include "../Array/arrayLogic.cpp"
 #include "../Heap/heap.cpp"
-<<<<<<< HEAD
 #include "../RBTree/RBTree.cpp"
 #include "../Logic/mainLogic.cpp"
-=======
->>>>>>> main
 using namespace std;
 
 //* Structures Declaration
-LinkedList *head = nullptr;
+LinkedList list = LinkedList();
 Array array = Array();
 Heap heap = Heap();
 RBTree tree = RBTree();
@@ -99,29 +96,29 @@ void listMenu()
         case '1':
             cout << "Enter value: ";
             cin >> val;
-            LinkedList::push_back(&head, val);
+            list.push_back(val);
             break;
         case '2':
-            LinkedList::pop_back(&head);
+            list.pop_back();
             break;
         case '3':
             cout << "Enter value to find: ";
             cin >> val;
-            LinkedList *elem;
-            elem = LinkedList::findElement(&head, val);
+            ListNode *elem;
+            elem = list.findElement(val);
             if (elem != nullptr)
-                elem->print();
+                elem->printData();
             else
                 cout << "Element " << val << " is not in the List" << endl;
             break;
         case '4':
-            LinkedList::printList(head);
+            list.printList();
             break;
         case '5':
-            fillLinkedListWithRandomData(head);
+            fillLinkedListWithRandomData(&list);
             break;
         case '6':
-            fillLinkedListFromFile(head);
+            fillLinkedListFromFile(&list);
             break;
         case '7':
             return;

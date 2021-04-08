@@ -1,10 +1,15 @@
 #include <iostream>
 #include <time.h>
 #include <fstream>
-#include "../Timer/timer.cpp"
 #include "linkedList.cpp"
 
-void fillLinkedListFromFile(LinkedList *&list)
+void deleteList(LinkedList *list)
+{
+    LinkedList newList = LinkedList();
+    *list = newList;
+}
+
+void fillLinkedListFromFile(LinkedList *list)
 {
     fstream file;
     file.open("data.txt", ios::in);
@@ -21,15 +26,15 @@ void fillLinkedListFromFile(LinkedList *&list)
     while (!file.eof())
     {
         file >> data;
-        list->push_back(&list, data);
+        list->push_back(data);
     }
 }
 
-void fillLinkedListWithRandomData(LinkedList *&list)
+void fillLinkedListWithRandomData(LinkedList *list)
 {
     srand(time(NULL));
 
-    if (list != nullptr)
+    if (!list->isEmpty())
     {
         cout << "List is not empty!";
         return;
@@ -45,11 +50,27 @@ void fillLinkedListWithRandomData(LinkedList *&list)
     {
         int value = rand() % 300;
         Timer timer;
-        LinkedList::push_back(&list, value);
+        list->push_back(value);
         time += timer.getTime().count() * 1000.0f;
     }
 
     float avgTime = time / size;
 
-    cout << "Average time: " << avgTime << "\n";
+    cout << "Average time of push_back: " << avgTime << " ms\n";
+
+    deleteList(list);
+
+    time = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        int value = rand() % 300;
+        Timer timer;
+        list->push_front(value);
+        time += timer.getTime().count() * 1000.0f;
+    }
+
+    avgTime = time / size;
+
+    cout << "Average time of push_front: " << avgTime << " ms\n";
 }

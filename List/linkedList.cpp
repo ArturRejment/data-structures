@@ -1,83 +1,104 @@
 #include <iostream>
+#include "../Timer/timer.cpp"
 #include "linkedList.h"
 using namespace std;
 
-LinkedList::LinkedList(int data)
+LinkedList::LinkedList()
 {
-    this->data = data;
-    next = nullptr;
-    prev = nullptr;
+    this->head = nullptr;
+    this->tail = nullptr;
 }
 
-void LinkedList::print()
+bool LinkedList::isEmpty()
 {
-    cout << data << " ";
+    if (head == nullptr)
+    {
+        return true;
+    }
+    return false;
 }
 
-void LinkedList::push_back(LinkedList **head, int data)
+void LinkedList::printList()
 {
-    LinkedList *newNode = new LinkedList(data);
-    LinkedList *temp = (*head);
-    LinkedList *temp2 = nullptr;
+    ListNode *temp = head;
+    if (temp == nullptr)
+    {
+        cout << "List is empty!\n";
+        return;
+    }
 
     while (temp != nullptr)
     {
-        temp2 = temp;
+        cout << temp->data << " ";
         temp = temp->next;
     }
+}
 
-    if ((*head) == nullptr)
+void LinkedList::push_back(int data)
+{
+    ListNode *newNode = new ListNode(data);
+    if (head == nullptr)
     {
-        (*head) = newNode;
+        head = tail = newNode;
     }
     else
     {
-        temp2->next = newNode;
-        newNode->prev = temp2;
-        newNode->next = nullptr;
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
     }
 }
 
-void LinkedList::push_front(LinkedList **head, int data)
+void LinkedList::push_front(int data)
 {
-    LinkedList *newNode = new LinkedList(data);
-    newNode->prev = nullptr;
-    newNode->next = (*head);
-    if ((*head) != nullptr)
-        (*head)->prev = newNode;
-    (*head) = newNode;
+    ListNode *newNode = new ListNode(data);
+    if (head == nullptr)
+    {
+        head = tail = newNode;
+    }
+    else
+    {
+        head->prev = newNode;
+        newNode->next = head;
+        head = newNode;
+    }
 }
 
-void LinkedList::pop_back(LinkedList **head)
+void LinkedList::pop_back()
 {
-    LinkedList *temp = (*head);
-    LinkedList *temp2 = NULL;
-
-    if ((*head) == NULL)
+    if (tail == nullptr)
     {
+        cout << "List is already empty!\n";
         return;
     }
 
-    if ((*head)->next == NULL)
+    ListNode *temp = tail;
+    tail->prev->next = nullptr;
+    tail = tail->prev;
+    free(temp);
+}
+
+void LinkedList::pop_front()
+{
+
+    if (head == nullptr)
     {
-        *head = NULL;
+        cout << "List is already empty!\n";
         return;
     }
 
-    while (temp->next->next != NULL)
-    {
-        temp = temp->next;
-    }
-    free(temp->next);
-    temp->next = NULL;
+    ListNode *temp = head;
+    head = head->next;
+    head->prev = nullptr;
+    free(temp);
 }
 
-LinkedList *LinkedList::findElement(LinkedList **head, int val)
+ListNode *LinkedList::findElement(int val)
 {
 
-    LinkedList *temp = (*head);
+    ListNode *temp = head;
 
-    if (*head == nullptr)
+    if (head == nullptr)
         return nullptr;
 
     while (temp != nullptr)
@@ -89,14 +110,4 @@ LinkedList *LinkedList::findElement(LinkedList **head, int val)
         temp = temp->next;
     }
     return nullptr;
-}
-
-void LinkedList::printList(LinkedList *head)
-{
-    cout << "Linked list: " << flush;
-    while (head != NULL)
-    {
-        head->print();
-        head = head->next;
-    }
 }
