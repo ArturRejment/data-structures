@@ -27,11 +27,8 @@ void Array::addElement(int value)
     array[size - 1] = value;
 }
 
-void Array::addElementOnPosition(int value)
+void Array::addElementOnPosition(int value, int position)
 {
-    cout << "At what position?: " << flush;
-    int position;
-    cin >> position;
     position++;
 
     if (position > size || position < 0)
@@ -64,6 +61,11 @@ void Array::addElementAtTheBegenning(int value)
 void Array::printArray()
 {
     cout << "Array: ";
+    if (size == 0)
+    {
+        cout << "Array is empty\n";
+        return;
+    }
     for (int i = 0; i < size; i++)
     {
         cout << array[i] << " ";
