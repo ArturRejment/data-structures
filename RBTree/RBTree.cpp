@@ -350,7 +350,7 @@ RBNode *RBTree::insertElementNormalBST(RBNode *rootB, RBNode *newNode)
     if (rootB == nullptr)
         return newNode;
 
-    if (newNode->data < rootB->data)
+    if (newNode->data <= rootB->data)
     {
         rootB->leftChild = insertElementNormalBST(rootB->leftChild, newNode);
         rootB->leftChild->parent = rootB;
