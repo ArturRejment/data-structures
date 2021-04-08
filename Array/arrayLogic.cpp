@@ -1,9 +1,6 @@
 #include <iostream>
-<<<<<<< HEAD
-=======
 #include <math.h>
 #include "../Timer/timer.cpp"
->>>>>>> array
 #include "array.cpp"
 
 void deleteArray(Array *array)
