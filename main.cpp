@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    printMenu();
+    selectMode();
 
     return 0;
 }

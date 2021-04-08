@@ -17,11 +17,13 @@ void printDefaultMenu()
 {
     cout << "[1] Add element\n";
     cout << "[2] Delete element\n";
-    cout << "[3] Find element\n";
-    cout << "[4] Print structure\n";
-    cout << "[5] Fill structure with random values\n";
-    cout << "[6] Fill structure with values from the file\n";
-    cout << "[7] Return\n";
+    cout << "[3] Fill structure with random values\n";
+    cout << "[4] Fill structure with values from the file\n";
+    cout << "[5] Find element\n";
+    cout << "[6] Print structure\n";
+    cout << "[7] Clear structure\n";
+    cout << "[8] Return\n";
+    cout << "Press key with your choice\n";
 }
 
 void arrayMenu()
@@ -30,9 +32,6 @@ void arrayMenu()
     {
         cout << "------------- ARRAY MENU -------------" << endl;
         printDefaultMenu();
-        cout << "[8] Add element on a position\n";
-        cout << "[9] Add element at the beginning\n";
-        cout << "[a] Delete array\n";
 
         char choice = getch();
         int val;
@@ -50,32 +49,21 @@ void arrayMenu()
             cin >> val;
             array.deleteElement(val);
             break;
-        case '4':
-            array.printArray();
-            break;
-        case '5':
+        case '3':
             fillArrayWithRandomData(&array);
             break;
-        case '8':
-            cout << "Enter value: ";
-            cin >> val;
-            cout << "Enter position: ";
-            cin >> pos;
-            array.addElementOnPosition(val, pos);
-            break;
-        case '9':
-            cout << "Enter value: ";
-            cin >> val;
-            array.addElementAtTheBegenning(val);
-            break;
-        case 'a':
-            deleteArray(&array);
+        case '6':
+            array.printArray();
             break;
         case '7':
+            deleteArray(&array);
+            break;
+        case '8':
             return;
             break;
 
         default:
+            cout << "Invalid choice!\n";
             break;
         }
     } while (true);
@@ -102,6 +90,12 @@ void listMenu()
             list.pop_back();
             break;
         case '3':
+            fillLinkedListWithRandomData(&list);
+            break;
+        case '4':
+            fillLinkedListFromFile(&list);
+            break;
+        case '5':
             cout << "Enter value to find: ";
             cin >> val;
             ListNode *elem;
@@ -111,16 +105,13 @@ void listMenu()
             else
                 cout << "Element " << val << " is not in the List" << endl;
             break;
-        case '4':
+        case '6':
             list.printList();
             break;
-        case '5':
-            fillLinkedListWithRandomData(&list);
-            break;
-        case '6':
-            fillLinkedListFromFile(&list);
-            break;
         case '7':
+            deleteList(&list);
+            break;
+        case '8':
             return;
             break;
         default:
@@ -181,7 +172,7 @@ void treeMenu()
             cin >> val;
             tree.deleteElement(tree.find(val));
             break;
-        case '3':
+        case '5':
             cout << "Enter value: ";
             cin >> val;
             RBNode *temp;
@@ -191,10 +182,10 @@ void treeMenu()
             else
                 cout << "Element " << val << " is not in the structure\n";
             break;
-        case '4':
+        case '6':
             tree.inorder();
             break;
-        case '7':
+        case '8':
             return;
 
         default:
@@ -203,19 +194,55 @@ void treeMenu()
     } while (true);
 }
 
-void printMenu()
+void printExperimentMenu()
+{
+    char choice;
+    system("clear");
+
+    cout << "------------- EXPERIMENT MENU -------------" << endl;
+    cout << "[1] Array" << endl;
+    cout << "[2] Linked list" << endl;
+    cout << "[3] Binary heap" << endl;
+    cout << "[4] Red-black tree" << endl;
+    cout << "[5] Exit" << endl;
+
+    choice = getch();
+    switch (choice)
+    {
+    case '1':
+        arrayMenu();
+        break;
+    case '2':
+        listMenu();
+        break;
+    case '3':
+        heapMenu();
+        break;
+    case '4':
+        treeMenu();
+        break;
+    case '5':
+        return;
+        break;
+    default:
+        return;
+        break;
+    }
+}
+
+void printTestingMenu()
 {
     do
     {
         char choice;
         system("clear");
 
-        cout << "------------- MENU -------------" << endl;
+        cout << "------------- TESTING MENU -------------" << endl;
         cout << "[1] Array" << endl;
         cout << "[2] Linked list" << endl;
         cout << "[3] Binary heap" << endl;
         cout << "[4] Red-black tree" << endl;
-        cout << "[5] Exit program" << endl;
+        cout << "[5] Exit" << endl;
 
         choice = getch();
         switch (choice)
@@ -240,4 +267,27 @@ void printMenu()
             break;
         }
     } while (true);
+}
+
+void selectMode()
+{
+    cout << "-------------- START ----------------\n";
+    cout << "[1] Experiment mode\n";
+    cout << "[2] Testing mode\n";
+    cout << "[3] Exit program\n";
+    cout << "Press key with your choice\n";
+
+    char choice = getch();
+    switch (choice)
+    {
+    case '1':
+        printExperimentMenu();
+        break;
+    case '2':
+        printTestingMenu();
+        break;
+
+    default:
+        break;
+    }
 }
