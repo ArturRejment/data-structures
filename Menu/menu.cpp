@@ -137,10 +137,10 @@ void heapMenu()
             cin >> val;
             heap.insert(val);
             break;
-        case '4':
+        case '6':
             heap.printHeap();
             break;
-        case '7':
+        case '8':
             return;
             break;
 

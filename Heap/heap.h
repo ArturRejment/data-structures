@@ -1,10 +1,8 @@
-#include <vector>
-
 class Heap
 {
 private:
     int size;
-    std::vector<int> heap = {-1};
+    int *heap;
 
     int parent(int i) { return i >> 1; };           // i/2
     int leftChild(int i) { return i << 1; };        // i*2
@@ -18,4 +16,6 @@ public:
     void printHeap();
     void shiftUp(int i);
     void shiftDown(int i);
+    void heapify(int i);
+    void deleteElement(int);
 };

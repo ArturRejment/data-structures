@@ -5,61 +5,112 @@ using namespace std;
 
 Heap::Heap()
 {
+    this->size = 0;
+    this->heap = nullptr;
 }
 
 void Heap::printHeap()
 {
-    for (auto val : heap)
+    for (int i = 0; i < size; i++)
     {
-        cout << val << " ";
+        cout << heap[i] << "\n";
     }
-    cout << "\n";
 }
 
 void Heap::insert(int value)
 {
-    if (size + 1 >= heap.size())
+    if (heap == nullptr)
     {
-        heap.push_back(0);
+        heap = new int[1];
+        heap[0] = value;
+        size++;
+        return;
     }
-    heap[++size] = value;
-    shiftUp(size);
+    size++;
+    heap = (int *)realloc(heap, size * sizeof(int));
+    heap[size - 1] = value;
+    for (int i = size / 2 - 1; i >= 0; i--)
+    {
+        heapify(i);
+    }
 }
 
-void Heap::shiftUp(int i)
+void Heap::deleteElement(int value)
 {
-    if (i > size)
-        return;
-    if (i == 1)
-        return;
-    if (heap[i] > heap[parent(i)])
+    int i;
+    for (i = 0; i < size; i++)
     {
-        swap(heap[parent(i)], heap[i]);
+        if (value == heap[i])
+            break;
     }
-    shiftUp(parent(i));
+
+    swap(heap[i], heap[size - 1]);
+    size -= 1;
+    for (int i = size / 2 - 1; i >= 0; i--)
+    {
+        heapify(i);
+    }
+
+    heap = (int *)realloc(heap, size * sizeof(int));
 }
 
-void Heap::shiftDown(int i)
+void Heap::heapify(int i)
 {
-    if (i > size)
-        return;
-
-    int swapId = i;
-
-    if (leftChild(i) <= size && heap[i] < heap[leftChild(i)])
+    if (size == 1)
     {
-        swapId = leftChild(i);
+        printf("Single element in the heap");
     }
-
-    if (rightChild(i) <= size && heap[swapId] < heap[rightChild(i)])
+    else
     {
-        swapId = rightChild(i);
+        int largest = i;
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
+        if (l < size && heap[l] > heap[largest])
+            largest = l;
+        if (r < size && heap[r] > heap[largest])
+            largest = r;
+        if (largest != i)
+        {
+            swap(heap[i], heap[largest]);
+            heapify(largest);
+        }
     }
-
-    if (swapId != i)
-    {
-        swap(heap[i], heap[swapId]);
-        shiftDown(swapId);
-    }
-    return;
 }
+
+// void Heap::shiftUp(int i)
+// {
+//     if (i > size)
+//         return;
+//     if (i == 1)
+//         return;
+//     if (heap[i] > heap[parent(i)])
+//     {
+//         swap(heap[parent(i)], heap[i]);
+//     }
+//     shiftUp(parent(i));
+// }
+
+// void Heap::shiftDown(int i)
+// {
+//     if (i > size)
+//         return;
+
+//     int swapId = i;
+
+//     if (leftChild(i) <= size && heap[i] < heap[leftChild(i)])
+//     {
+//         swapId = leftChild(i);
+//     }
+
+//     if (rightChild(i) <= size && heap[swapId] < heap[rightChild(i)])
+//     {
+//         swapId = rightChild(i);
+//     }
+
+//     if (swapId != i)
+//     {
+//         swap(heap[i], heap[swapId]);
+//         shiftDown(swapId);
+//     }
+//     return;
+// }
