@@ -2,7 +2,7 @@
 #include <conio.h>
 #include "../List/listLogic.cpp"
 #include "../Array/arrayLogic.cpp"
-#include "../Heap/heap.cpp"
+#include "../Heap/heapLogic.cpp"
 #include "../RBTree/RBTree.cpp"
 #include "../Logic/mainLogic.cpp"
 using namespace std;
@@ -21,9 +21,9 @@ void printDefaultMenu()
     cout << "[4] Fill structure with values from the file\n";
     cout << "[5] Find element\n";
     cout << "[6] Print structure\n";
-    cout << "[7] Clear structure\n";
+    cout << "[7] cls structure\n";
     cout << "[8] Return\n";
-    cout << "Press key with your choice\n";
+    cout << "Press key with your choice" << flush;
 }
 
 int askForValue()
@@ -138,10 +138,19 @@ void heapMenu()
         case '2':
             heap.deleteElement(askForValue());
             break;
+        case '3':
+            fillHeapWithRandomData(&heap);
+            break;
+        case '4':
+            fillHeapFromFile(&heap);
+            break;
         case '5':
             heap.findElement(askForValue());
         case '6':
             heap.printHeap();
+            break;
+        case '7':
+            deleteHeap(&heap);
             break;
         case '8':
             return;
@@ -194,7 +203,7 @@ void treeMenu()
 void printExperimentMenu()
 {
     char choice;
-    system("clear");
+    system("cls");
 
     cout << "------------- EXPERIMENT MENU -------------" << endl;
     cout << "[1] Array" << endl;
@@ -232,7 +241,7 @@ void printTestingMenu()
     do
     {
         char choice;
-        system("clear");
+        system("cls");
 
         cout << "------------- TESTING MENU -------------" << endl;
         cout << "[1] Array" << endl;

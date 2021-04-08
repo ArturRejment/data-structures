@@ -15,7 +15,7 @@ void fillLinkedListFromFile(LinkedList *list)
     file.open("data.txt", ios::in);
     if (!file.is_open())
     {
-        cout << "[LinkedList] Cannot open data.txt" << endl;
+        cout << "[LinkedList] Cannot open data.txt\n";
         return;
     }
 

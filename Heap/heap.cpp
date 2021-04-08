@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "heap.h"
 using namespace std;
 
@@ -15,6 +14,13 @@ void Heap::printHeap()
     {
         cout << heap[i] << "\n";
     }
+}
+
+bool Heap::isEmpty()
+{
+    if (size <= 0)
+        return true;
+    return false;
 }
 
 void Heap::findElement(int value)
