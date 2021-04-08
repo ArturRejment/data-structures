@@ -17,6 +17,19 @@ void Heap::printHeap()
     }
 }
 
+void Heap::findElement(int value)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (heap[i] == value)
+        {
+            cout << "Found " << value << " in heap\n";
+            return;
+        }
+    }
+    cout << value << " is not in the heap\n";
+}
+
 void Heap::insert(int value)
 {
     if (heap == nullptr)

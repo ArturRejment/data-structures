@@ -26,6 +26,14 @@ void printDefaultMenu()
     cout << "Press key with your choice\n";
 }
 
+int askForValue()
+{
+    int val;
+    cout << "Enter value: ";
+    cin >> val;
+    return val;
+}
+
 void arrayMenu()
 {
     do
@@ -40,14 +48,10 @@ void arrayMenu()
         switch (choice)
         {
         case '1':
-            cout << "Enter value: ";
-            cin >> val;
-            array.addElement(val);
+            array.addElement(askForValue());
             break;
         case '2':
-            cout << "Enter value: ";
-            cin >> val;
-            array.deleteElement(val);
+            array.deleteElement(askForValue());
             break;
         case '3':
             fillArrayWithRandomData(&array);
@@ -82,9 +86,7 @@ void listMenu()
         switch (choice)
         {
         case '1':
-            cout << "Enter value: ";
-            cin >> val;
-            list.push_back(val);
+            list.push_back(askForValue());
             break;
         case '2':
             list.pop_back();
@@ -96,10 +98,8 @@ void listMenu()
             fillLinkedListFromFile(&list);
             break;
         case '5':
-            cout << "Enter value to find: ";
-            cin >> val;
             ListNode *elem;
-            elem = list.findElement(val);
+            elem = list.findElement(askForValue());
             if (elem != nullptr)
                 elem->printData();
             else
@@ -133,15 +133,13 @@ void heapMenu()
         switch (choice)
         {
         case '1':
-            cout << "Enter value: ";
-            cin >> val;
-            heap.insert(val);
+            heap.insert(askForValue());
             break;
         case '2':
-            cout << "Enter value: ";
-            cin >> val;
-            heap.deleteElement(val);
+            heap.deleteElement(askForValue());
             break;
+        case '5':
+            heap.findElement(askForValue());
         case '6':
             heap.printHeap();
             break;
@@ -168,20 +166,14 @@ void treeMenu()
         switch (choice)
         {
         case '1':
-            cout << "Enter value: ";
-            cin >> val;
-            tree.insertElement(val);
+            tree.insertElement(askForValue());
             break;
         case '2':
-            cout << "Enter value: ";
-            cin >> val;
-            tree.deleteElement(tree.find(val));
+            tree.deleteElement(tree.find(askForValue()));
             break;
         case '5':
-            cout << "Enter value: ";
-            cin >> val;
             RBNode *temp;
-            temp = tree.find(val);
+            temp = tree.find(askForValue());
             if (temp != nullptr)
                 cout << "Found " << val;
             else

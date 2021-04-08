@@ -18,4 +18,5 @@ public:
     void shiftDown(int i);
     void heapify(int i);
     void deleteElement(int);
+    void findElement(int);
 };
