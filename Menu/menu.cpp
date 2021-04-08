@@ -1,11 +1,13 @@
 #include <iostream>
 #include <conio.h>
-#include "../Timer/timer.cpp"
-#include "../List/linkedList.cpp"
-#include "../Array/array.cpp"
+#include "../List/listLogic.cpp"
+#include "../Array/arrayLogic.cpp"
 #include "../Heap/heap.cpp"
+<<<<<<< HEAD
 #include "../RBTree/RBTree.cpp"
 #include "../Logic/mainLogic.cpp"
+=======
+>>>>>>> main
 using namespace std;
 
 //* Structures Declaration
@@ -16,13 +18,13 @@ RBTree tree = RBTree();
 
 void printDefaultMenu()
 {
-    cout << "[1] Add element" << endl;
-    cout << "[2] Delete element" << endl;
-    cout << "[3] Find element" << endl;
-    cout << "[4] Print structure" << endl;
-    cout << "[5] Fill structure with random values" << endl;
-    cout << "[6] Fill structure with values from the file" << endl;
-    cout << "[7] Return" << endl;
+    cout << "[1] Add element\n";
+    cout << "[2] Delete element\n";
+    cout << "[3] Find element\n";
+    cout << "[4] Print structure\n";
+    cout << "[5] Fill structure with random values\n";
+    cout << "[6] Fill structure with values from the file\n";
+    cout << "[7] Return\n";
 }
 
 void arrayMenu()
@@ -31,9 +33,13 @@ void arrayMenu()
     {
         cout << "------------- ARRAY MENU -------------" << endl;
         printDefaultMenu();
+        cout << "[8] Add element on a position\n";
+        cout << "[9] Add element at the beginning\n";
+        cout << "[a] Delete array\n";
 
         char choice = getch();
         int val;
+        int pos;
 
         switch (choice)
         {
@@ -49,6 +55,24 @@ void arrayMenu()
             break;
         case '4':
             array.printArray();
+            break;
+        case '5':
+            fillArrayWithRandomData(&array);
+            break;
+        case '8':
+            cout << "Enter value: ";
+            cin >> val;
+            cout << "Enter position: ";
+            cin >> pos;
+            array.addElementOnPosition(val, pos);
+            break;
+        case '9':
+            cout << "Enter value: ";
+            cin >> val;
+            array.addElementAtTheBegenning(val);
+            break;
+        case 'a':
+            deleteArray(&array);
             break;
         case '7':
             return;

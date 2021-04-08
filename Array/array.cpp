@@ -15,18 +15,57 @@ Array::~Array()
     return;
 }
 
+int Array::getSize()
+{
+    return this->size;
+}
+
 void Array::addElement(int value)
 {
-    Timer timer;
     size++;
     array = (int *)realloc(array, size * sizeof(int));
     array[size - 1] = value;
 }
 
+void Array::addElementOnPosition(int value, int position)
+{
+    position++;
+
+    if (position > size || position < 0)
+    {
+        return;
+    }
+
+    size++;
+    array = (int *)realloc(array, size * sizeof(int));
+    int i;
+    for (i = size; i >= position; i--)
+    {
+        array[i] = array[i - 1];
+    }
+    array[i] = value;
+}
+
+void Array::addElementAtTheBegenning(int value)
+{
+    size++;
+    array = (int *)realloc(array, size * sizeof(int));
+    int i;
+    for (i = size; i >= 1; i--)
+    {
+        array[i] = array[i - 1];
+    }
+    array[i] = value;
+}
+
 void Array::printArray()
 {
-    Timer timer;
     cout << "Array: ";
+    if (size == 0)
+    {
+        cout << "Array is empty\n";
+        return;
+    }
     for (int i = 0; i < size; i++)
     {
         cout << array[i] << " ";
@@ -36,7 +75,6 @@ void Array::printArray()
 
 void Array::deleteElement(int value)
 {
-    Timer timer;
     int position = -1;
     for (int i = 0; i < size; i++)
     {
