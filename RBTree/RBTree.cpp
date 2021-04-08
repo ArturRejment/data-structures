@@ -4,23 +4,7 @@ using namespace std;
 
 RBTree ::RBTree()
 {
-    cr = cl = cp = "  ";
-    cr[0] = 218;
-    cr[1] = 196;
-    cl[0] = 192;
-    cl[1] = 196;
-    cp[0] = 179;
     root = nullptr;
-}
-
-void RBTree::print()
-{
-    printTree("", "", root);
-}
-
-RBTree ::~RBTree()
-{
-    deleteTree(root);
 }
 
 RBNode *RBTree::getRoot()
@@ -36,6 +20,13 @@ void RBTree ::deleteTree(RBNode *node)
         deleteTree(node->leftChild);
         delete node;
     }
+}
+
+bool RBTree::isEmpty()
+{
+    if (root == nullptr)
+        return true;
+    return false;
 }
 
 RBNode *RBTree::find(int value)
@@ -119,6 +110,49 @@ void RBTree::leftRotation(RBNode *rotatingNode)
         else
             root = rightChildOfRotatingNode;
     }
+
+    // RBNode *right = rotatingNode->rightChild;
+    // rotatingNode->rightChild = right->leftChild;
+
+    // if (rotatingNode->rightChild != nullptr)
+    // {
+    //     rotatingNode->rightChild->parent = rotatingNode;
+    // }
+    // right->parent = rotatingNode->parent;
+    // if (rotatingNode->parent == nullptr)
+    //     root = right;
+    // else if (rotatingNode == rotatingNode->parent->leftChild)
+    //     rotatingNode->parent->leftChild = right;
+    // else
+    //     rotatingNode->parent->rightChild = right;
+
+    // right->leftChild = rotatingNode;
+    // rotatingNode->parent = right;
+
+    // RBNode *B, *p;
+
+    // B = A->rightChild;
+    // if (B != nullptr)
+    // {
+    //     p = A->parent;
+    //     A->rightChild = B->leftChild;
+    //     if (A->rightChild != nullptr)
+    //         A->rightChild->parent = A;
+
+    //     B->leftChild = A;
+    //     B->parent = p;
+    //     A->parent = B;
+
+    //     if (p != nullptr)
+    //     {
+    //         if (p->leftChild == A)
+    //             p->leftChild = B;
+    //         else
+    //             p->rightChild = B;
+    //     }
+    //     else
+    //         root = B;
+    // }
 }
 
 void RBTree::rightRotation(RBNode *rotatingNode)
@@ -145,6 +179,49 @@ void RBTree::rightRotation(RBNode *rotatingNode)
         else
             root = leftOfRotatingNode;
     }
+
+    // RBNode *left = rotatingNode->leftChild;
+    // rotatingNode->leftChild = left->rightChild;
+
+    // if (rotatingNode->leftChild == nullptr)
+    //     rotatingNode->leftChild->parent = rotatingNode;
+
+    // left->parent = rotatingNode->parent;
+
+    // if (rotatingNode->parent == nullptr)
+    //     root = left;
+    // else if (rotatingNode == rotatingNode->parent->leftChild)
+    //     rotatingNode->parent->leftChild = left;
+    // else
+    //     rotatingNode->parent->rightChild = left;
+
+    // left->rightChild = rotatingNode;
+    // rotatingNode->parent = left;
+
+    // RBNode *B, *p;
+
+    // B = A->leftChild;
+    // if (B != nullptr)
+    // {
+    //     p = A->parent;
+    //     A->leftChild = B->rightChild;
+    //     if (A->leftChild != nullptr)
+    //         A->leftChild->parent = A;
+
+    //     B->rightChild = A;
+    //     B->parent = p;
+    //     A->parent = B;
+
+    //     if (p != nullptr)
+    //     {
+    //         if (p->leftChild == A)
+    //             p->leftChild = B;
+    //         else
+    //             p->rightChild = B;
+    //     }
+    //     else
+    //         root = B;
+    // }
 }
 
 void RBTree::deleteElement(RBNode *nodeToDelete)
@@ -363,7 +440,7 @@ RBNode *RBTree::insertElementNormalBST(RBNode *rootB, RBNode *newNode)
     return rootB;
 }
 
-void RBTree::restoreRBTreeProperties(RBNode *newNode)
+void RBTree::restoreRBTreeProperties(RBNode *&newNode)
 {
     RBNode *parent = nullptr;
     RBNode *grand_parent = nullptr;
@@ -429,28 +506,6 @@ void RBTree::restoreRBTreeProperties(RBNode *newNode)
         }
     }
     root->color = BLACK;
-}
-
-void RBTree::printTree(string sp, string sn, RBNode *node)
-{
-
-    string text;
-
-    if (node != nullptr)
-    {
-        text = sp;
-        if (sn == cr)
-            text[text.length() - 2] = ' ';
-        printTree(text + cp, cr, node->rightChild);
-
-        text = text.substr(0, sp.length() - 2);
-        cout << text << sn << node->color << ":" << node->data << endl;
-
-        text = sp;
-        if (sn == cl)
-            text[text.length() - 2] = ' ';
-        printTree(text + cp, cl, node->leftChild);
-    }
 }
 
 void inorderH(RBNode *root)
