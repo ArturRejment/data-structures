@@ -241,7 +241,7 @@ void printExperimentMenu()
         arrayMenu();
         break;
     case '2':
-        listMenu();
+        linkedListExperiment(&list);
         break;
     case '3':
         heapMenu();
