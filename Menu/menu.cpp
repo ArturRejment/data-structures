@@ -184,7 +184,7 @@ void treeMenu()
             tree.insertElement(askForValue());
             break;
         case '2':
-            tree.deleteElement(tree.find(askForValue()));
+            tree.deleteElement(askForValue());
             break;
         case '3':
             fillTreeWithRandomData(&tree);
