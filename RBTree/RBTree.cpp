@@ -29,6 +29,20 @@ bool RBTree::isEmpty()
     return false;
 }
 
+RBNode *RBTree::getSibling(RBNode *node)
+{
+    if (node->parent == nullptr)
+    {
+        return nullptr;
+    }
+
+    if (node == node->parent->leftChild)
+    {
+        return node->parent->rightChild;
+    }
+    return node->parent->leftChild;
+}
+
 RBNode *RBTree::find(int value)
 {
     RBNode *temp;
@@ -138,44 +152,184 @@ void RBTree::rightRotation(RBNode *rotatingNode)
     }
 }
 
-void RBTree::deleteElement(int value)
+void RBTree::fixDoubleBlack(RBNode *node)
 {
-    root = deleteElementLikeBST(root, value);
-    restoreRBTreeProperties(root);
-}
+    if (node == root)
+        // Reached root
+        return;
 
-RBNode *RBTree::deleteElementLikeBST(RBNode *node, int value)
-{
-    if (node == nullptr)
-        return node;
-
-    if (value < node->data)
-        node->leftChild = deleteElementLikeBST(node->leftChild, value);
-
-    else if (value > node->data)
+    RBNode *sibling = getSibling(node), *parent = node->parent;
+    if (sibling == NULL)
     {
-        node->rightChild = deleteElementLikeBST(node->rightChild, value);
+        // No sibiling, double black pushed up
+        fixDoubleBlack(parent);
     }
     else
     {
-        if (node->leftChild == nullptr)
+        if (sibling->color == RED)
         {
-            RBNode *temp = node->leftChild;
-            free(node);
-            return temp;
+            // Sibling red
+            parent->color = RED;
+            sibling->color = BLACK;
+            if (sibling == sibling->parent->leftChild)
+            {
+                // left case
+                rightRotation(parent);
+            }
+            else
+            {
+                // right case
+                leftRotation(parent);
+            }
+            fixDoubleBlack(node);
         }
-        else if (node->rightChild == nullptr)
+        else
         {
-            RBNode *temp = node->leftChild;
-            free(node);
-            return temp;
+            // Sibling black
+            if ((sibling->leftChild != nullptr && sibling->leftChild->color == RED) || (sibling->rightChild != nullptr && sibling->rightChild->color == RED))
+            {
+                // at least 1 red children
+                if (sibling->leftChild != nullptr and sibling->leftChild->color == RED)
+                {
+                    if (sibling == sibling->parent->leftChild)
+                    {
+                        // left left
+                        sibling->leftChild->color = sibling->color;
+                        sibling->color = parent->color;
+                        rightRotation(parent);
+                    }
+                    else
+                    {
+                        // right left
+                        sibling->leftChild->color = parent->color;
+                        rightRotation(sibling);
+                        leftRotation(parent);
+                    }
+                }
+                else
+                {
+                    if (sibling == sibling->parent->leftChild)
+                    {
+                        // left right
+                        sibling->rightChild->color = parent->color;
+                        leftRotation(sibling);
+                        rightRotation(parent);
+                    }
+                    else
+                    {
+                        // right right
+                        sibling->rightChild->color = sibling->color;
+                        sibling->color = parent->color;
+                        leftRotation(parent);
+                    }
+                }
+                parent->color = BLACK;
+            }
+            else
+            {
+                // 2 black children
+                sibling->color = RED;
+                if (parent->color == BLACK)
+                    fixDoubleBlack(parent);
+                else
+                    parent->color = BLACK;
+            }
         }
-
-        RBNode *temp = findMin(node->rightChild);
-        node->data = temp->data;
-        node->rightChild = deleteElementLikeBST(node->rightChild, temp->data);
     }
-    return node;
+}
+
+void RBTree::deleteElement(RBNode *node)
+{
+    //! Find node that replaces a deleted node
+    RBNode *replacingNode;
+    // When node have 2 children
+    if (node->leftChild != nullptr && node->rightChild != nullptr)
+        replacingNode = findSuccessor(node->rightChild);
+    // When node is a leaf
+    else if (node->leftChild == nullptr && node->rightChild == nullptr)
+        replacingNode = nullptr;
+    // When node has one child
+    if (node->leftChild != nullptr)
+        replacingNode = node->leftChild;
+    else
+        replacingNode = node->rightChild;
+
+    RBNode *parent = node->parent;
+
+    if (replacingNode == nullptr)
+    {
+        // replacingNode is nullptr therefore node is leaf
+        if (node == root)
+        {
+            // node is root, making root null
+            root = nullptr;
+        }
+        else
+        {
+            if ((replacingNode == nullptr or replacingNode->color == BLACK) and (node->color == BLACK))
+            {
+                // replacingNode and node both black
+                // node is leaf, fix double black at node
+                fixDoubleBlack(node);
+            }
+            else
+            {
+                // replacingNode or node is red
+                if (getSibling(node) != nullptr)
+                    // sibling is not null, make it red"
+                    getSibling(node)->color = RED;
+            }
+
+            // delete node from the tree
+            if (node == node->parent->leftChild)
+            {
+                parent->leftChild = nullptr;
+            }
+            else
+            {
+                parent->rightChild = nullptr;
+            }
+        }
+        delete node;
+        return;
+    }
+
+    if (node->leftChild == nullptr or node->rightChild == nullptr)
+    {
+        // node has 1 child
+        if (node == root)
+        {
+            // node is root, assign the value of replacingNode to node, and delete replacingNode
+            node->data = replacingNode->data;
+            node->leftChild = node->rightChild = nullptr;
+            delete replacingNode;
+        }
+        else
+        {
+            // Detach node from tree and move replacingNode up
+            if (node == node->parent->leftChild)
+            {
+                parent->leftChild = replacingNode;
+            }
+            else
+            {
+                parent->rightChild = replacingNode;
+            }
+            delete node;
+            replacingNode->parent = parent;
+            if ((replacingNode == nullptr or replacingNode->color == BLACK) and (node->color == BLACK))
+            {
+                // replacingNode and node both black, fix double black at replacingNode
+                fixDoubleBlack(replacingNode);
+            }
+            else
+            {
+                // replacingNode or node red, color replacingNode black
+                replacingNode->color = BLACK;
+            }
+        }
+        return;
+    }
 }
 
 void RBTree::insertElement(int value)
