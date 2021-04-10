@@ -228,10 +228,10 @@ void printExperimentMenu()
     system("cls");
 
     cout << "------------- EXPERIMENT MENU -------------" << endl;
-    cout << "[1] Array" << endl;
-    cout << "[2] Linked list" << endl;
-    cout << "[3] Binary heap" << endl;
-    cout << "[4] Red-black tree" << endl;
+    cout << "[1] Experiment on a Array" << endl;
+    cout << "[2] Experiment on a Linked list" << endl;
+    cout << "[3] Experiment on a Binary heap" << endl;
+    cout << "[4] Experiment on a Red-black tree" << endl;
     cout << "[5] Exit" << endl;
 
     choice = getch();
