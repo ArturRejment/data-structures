@@ -12,6 +12,7 @@ public:
     void addElementAtTheBegenning(int);
     void deleteElement(int);
     void deleteFromTheEnd();
+    void deleteFromTheBeginning();
     void findElement(int);
     void printArray();
     int getSize();

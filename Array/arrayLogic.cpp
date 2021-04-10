@@ -114,14 +114,32 @@ void arrayExperiment(Array *array)
     for (int i = 0; i < 100; i++)
     {
         fillArrayforExperiment(array, size);
-        value = rand() % 100000;
         Timer timer;
         array->deleteFromTheEnd();
         time += timer.getTime().count() * 1000.0f;
     }
     cout << "Deleting element from the end of the array took on average: " << time / 100 << " ms\n";
 
-    // TODO Implement deletion from the beginning and random position
+    //! Delete from the beginning
+    for (int i = 0; i < 100; i++)
+    {
+        fillArrayforExperiment(array, size);
+        Timer timer;
+        array->deleteFromTheBeginning();
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Deleting element from the beginning of the array took on average: " << time / 100 << " ms\n";
+
+    //! Delete from the random position
+    for (int i = 0; i < 100; i++)
+    {
+        fillArrayforExperiment(array, size);
+        position = rand() % (size - 1);
+        Timer timer;
+        array->deleteElement(position);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Deleting element from the random position in the array took on average: " << time / 100 << " ms\n";
 
     //! Find element
     time = 0;

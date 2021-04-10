@@ -92,18 +92,18 @@ void Array::deleteFromTheEnd()
     array = (int *)realloc(array, size * sizeof(int));
 }
 
-void Array::deleteElement(int value)
+void Array::deleteFromTheBeginning()
 {
-    int position = -1;
     for (int i = 0; i < size; i++)
     {
-        if (array[i] == value)
-            position = i;
+        array[i] = array[i + 1];
     }
+    size--;
+    array = (int *)realloc(array, size * sizeof(int));
+}
 
-    if (position == -1)
-        return;
-
+void Array::deleteElement(int position)
+{
     for (int i = position; i < size; i++)
     {
         array[i] = array[i + 1];
