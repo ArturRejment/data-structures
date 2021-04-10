@@ -4,8 +4,10 @@
 
 void deleteHeap(Heap *heap)
 {
+    Heap *temp = heap;
     Heap newHeap = Heap();
     *heap = newHeap;
+    free(temp);
 }
 
 void fillHeapFromFile(Heap *heap)
@@ -49,4 +51,63 @@ void fillHeapWithRandomData(Heap *heap)
         int value = rand() % 300;
         heap->insert(value);
     }
+}
+
+void fillHeapForExperiment(Heap *heap, int size)
+{
+    if (!heap->isEmpty())
+    {
+        deleteHeap(heap);
+    }
+    for (int i = 0; i < size; i++)
+    {
+        int value = rand() % 100000;
+        heap->insert(value);
+    }
+}
+
+void heapExperiment(Heap *heap)
+{
+    srand(time(NULL));
+    int size, value;
+    float time;
+
+    cout << " Please enter the size of the heap: " << flush;
+    cin >> size;
+
+    //! Insert element
+    time = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        fillHeapForExperiment(heap, size);
+        value = rand() % 100000;
+        Timer timer;
+        heap->insert(value);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Inserting element to the heap took on average: " << time / 100 << " ms\n";
+
+    //! Delete element
+    time = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        fillHeapForExperiment(heap, size);
+        value = rand() % 100000;
+        Timer timer;
+        heap->deleteElement(value);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Deleting element from the heap took on average: " << time / 100 << " ms\n";
+
+    //! Find element
+    time = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        fillHeapForExperiment(heap, size);
+        value = rand() % 100000;
+        Timer timer;
+        heap->findElement(value);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Finding element in the heap took on average: " << time / 100 << " ms\n";
 }

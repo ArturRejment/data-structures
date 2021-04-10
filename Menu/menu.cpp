@@ -244,7 +244,7 @@ void printExperimentMenu()
         linkedListExperiment(&list);
         break;
     case '3':
-        heapMenu();
+        heapExperiment(&heap);
         break;
     case '4':
         treeMenu();
