@@ -48,3 +48,90 @@ void fillArrayWithRandomData(Array *array)
         array->addElement(value);
     }
 }
+
+void fillArrayforExperiment(Array *array, int size)
+{
+    if (!array->isEmpty())
+    {
+        deleteArray(array);
+    }
+    for (int i = 0; i < size; i++)
+    {
+        int value = rand() % 100000;
+        array->addElement(value);
+    }
+}
+
+void arrayExperiment(Array *array)
+{
+    srand(time(NULL));
+    int size, value;
+    float time;
+
+    cout << "Please enter the size of the list: " << flush;
+    cin >> size;
+
+    //! Insert at the end
+    time = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        fillArrayforExperiment(array, size);
+        value = rand() % 100000;
+        Timer timer;
+        array->addElement(value);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Inserting element at the end of the array took on average: " << time / 100 << " ms\n";
+
+    //! Insert at the beginning
+    time = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        fillArrayforExperiment(array, size);
+        value = rand() % 100000;
+        Timer timer;
+        array->addElementAtTheBegenning(value);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Inserting element at the beginning of the array took on average: " << time / 100 << " ms\n";
+
+    //! Insert at the position
+    time = 0;
+    int position;
+    for (int i = 0; i < 100; i++)
+    {
+        fillArrayforExperiment(array, size);
+        value = rand() % 100000;
+        position = rand() % (size - 1);
+        Timer timer;
+        array->addElementOnPosition(value, position);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Inserting element at the random position of the array took on average: " << time / 100 << " ms\n";
+
+    //! Delete from the end
+    time = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        fillArrayforExperiment(array, size);
+        value = rand() % 100000;
+        Timer timer;
+        array->deleteFromTheEnd();
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Deleting element from the end of the array took on average: " << time / 100 << " ms\n";
+
+    // TODO Implement deletion from the beginning and random position
+
+    //! Find element
+    time = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        fillArrayforExperiment(array, size);
+        value = rand() % 100000;
+        Timer timer;
+        array->findElement(value);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Finding element in the array took on average: " << time / 100 << " ms\n";
+}

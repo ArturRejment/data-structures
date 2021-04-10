@@ -15,17 +15,22 @@ Array::~Array()
     return;
 }
 
+bool Array::isEmpty()
+{
+    if (size <= 0)
+        return true;
+    return false;
+}
+
 void Array::findElement(int value)
 {
     for (int i = 0; i < size; i++)
     {
         if (array[i] == value)
         {
-            cout << "Found " << value << " in the array\n";
             return;
         }
     }
-    cout << value << " is not in the array\n";
 }
 
 int Array::getSize()
@@ -43,11 +48,6 @@ void Array::addElement(int value)
 void Array::addElementOnPosition(int value, int position)
 {
     position++;
-
-    if (position > size || position < 0)
-    {
-        return;
-    }
 
     size++;
     array = (int *)realloc(array, size * sizeof(int));
@@ -84,6 +84,12 @@ void Array::printArray()
         cout << array[i] << " ";
     }
     cout << "\n";
+}
+
+void Array::deleteFromTheEnd()
+{
+    size--;
+    array = (int *)realloc(array, size * sizeof(int));
 }
 
 void Array::deleteElement(int value)

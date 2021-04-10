@@ -238,7 +238,7 @@ void printExperimentMenu()
     switch (choice)
     {
     case '1':
-        arrayMenu();
+        arrayExperiment(&array);
         break;
     case '2':
         linkedListExperiment(&list);

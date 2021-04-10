@@ -11,7 +11,9 @@ public:
     void addElementOnPosition(int, int);
     void addElementAtTheBegenning(int);
     void deleteElement(int);
+    void deleteFromTheEnd();
     void findElement(int);
     void printArray();
     int getSize();
+    bool isEmpty();
 };
