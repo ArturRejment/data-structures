@@ -4,7 +4,6 @@
 #include "../Array/arrayLogic.cpp"
 #include "../Heap/heapLogic.cpp"
 #include "../RBTree/RBTreeLogic.cpp"
-#include "../Logic/mainLogic.cpp"
 using namespace std;
 
 //* Structures Declaration
@@ -216,7 +215,7 @@ void treeMenu()
             system("cls");
             break;
         case '2':
-            tree.deleteElement(askForValue());
+            tree.deleteElement(tree.find(askForValue()));
             system("cls");
             break;
         case '3':
@@ -264,7 +263,8 @@ void printExperimentMenu()
     cout << "[2] Experiment on a Linked list" << endl;
     cout << "[3] Experiment on a Binary heap" << endl;
     cout << "[4] Experiment on a Red-black tree" << endl;
-    cout << "[5] Exit" << endl;
+    cout << "[5] Experiment on all structures" << endl;
+    cout << "[6] Exit" << endl;
 
     choice = getch();
     switch (choice)
@@ -282,6 +282,16 @@ void printExperimentMenu()
         treeExperiment(&tree);
         break;
     case '5':
+        cout << "ARRAY:\n";
+        arrayExperiment(&array);
+        cout << "LIST:\n";
+        linkedListExperiment(&list);
+        cout << "HEAP:\n";
+        heapExperiment(&heap);
+        cout << "TREE:\n";
+        treeExperiment(&tree);
+        break;
+    case '6':
         return;
         break;
     default:

@@ -35,11 +35,9 @@ void Heap::findElement(int value)
     {
         if (heap[i] == value)
         {
-            cout << "Found " << value << " in the heap\n";
             return;
         }
     }
-    cout << value << " is not in the heap\n";
 }
 
 void Heap::insert(int value)

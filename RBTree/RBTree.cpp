@@ -169,11 +169,8 @@ RBNode *getSibling(RBNode *node)
 }
 
 // deletes the given node
-void RBTree::deleteElement(int value)
+void RBTree::deleteElement(RBNode *deletingNode)
 {
-    RBNode *deletingNode = find(value);
-    if (deletingNode == nullptr)
-        return;
     RBNode *u;
     if (deletingNode->leftChild != nullptr and deletingNode->rightChild != nullptr)
         u = findSuccessor(deletingNode->rightChild);
@@ -269,7 +266,7 @@ void RBTree::deleteElement(int value)
 
     // deletingNode has 2 children, swap values with successor and recurse
     swap(u->data, deletingNode->data);
-    deleteElement(u->data);
+    deleteElement(u);
 }
 
 void RBTree::fixDoubleBlack(RBNode *x)
@@ -357,8 +354,6 @@ void RBTree::fixDoubleBlack(RBNode *x)
         }
     }
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void RBTree::insertElement(int value)
 {

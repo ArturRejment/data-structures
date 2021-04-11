@@ -57,7 +57,7 @@ void fillArrayforExperiment(Array *array, int size)
     }
     for (int i = 0; i < size; i++)
     {
-        int value = rand() % 100000;
+        int value = rand() % 30000;
         array->addElement(value);
     }
 }
@@ -76,7 +76,7 @@ void arrayExperiment(Array *array)
     for (int i = 0; i < 100; i++)
     {
         fillArrayforExperiment(array, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         array->addElement(value);
         time += timer.getTime().count() * 1000.0f;
@@ -88,7 +88,7 @@ void arrayExperiment(Array *array)
     for (int i = 0; i < 100; i++)
     {
         fillArrayforExperiment(array, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         array->addElementAtTheBegenning(value);
         time += timer.getTime().count() * 1000.0f;
@@ -101,7 +101,7 @@ void arrayExperiment(Array *array)
     for (int i = 0; i < 100; i++)
     {
         fillArrayforExperiment(array, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         position = rand() % (size - 1);
         Timer timer;
         array->addElementOnPosition(value, position);
@@ -146,7 +146,7 @@ void arrayExperiment(Array *array)
     for (int i = 0; i < 100; i++)
     {
         fillArrayforExperiment(array, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         array->findElement(value);
         time += timer.getTime().count() * 1000.0f;

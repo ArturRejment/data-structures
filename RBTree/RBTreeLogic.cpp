@@ -61,7 +61,7 @@ void fillTreeForExperiment(RBTree *tree, int size)
 
     for (int i = 0; i < size; i++)
     {
-        value = rand() % 100000;
+        value = rand() % 30000;
         tree->insertElement(value);
     }
 }
@@ -80,7 +80,7 @@ void treeExperiment(RBTree *tree)
     for (int i = 0; i < 100; i++)
     {
         fillTreeForExperiment(tree, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         tree->insertElement(value);
         time += timer.getTime().count() * 1000.0f;
@@ -89,12 +89,16 @@ void treeExperiment(RBTree *tree)
 
     //! Delete element
     time = 0;
+    RBNode *node;
     for (int i = 0; i < 100; i++)
     {
         fillTreeForExperiment(tree, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
-        tree->deleteElement(value);
+        node = tree->find(value);
+        if (node == nullptr)
+            continue;
+        tree->deleteElement(node);
         time += timer.getTime().count() * 1000.0f;
     }
     cout << "Deleting element form the red-black tree took on average: " << time / 100 << " ms\n";
@@ -104,7 +108,7 @@ void treeExperiment(RBTree *tree)
     for (int i = 0; i < 100; i++)
     {
         fillTreeForExperiment(tree, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         tree->find(value);
         time += timer.getTime().count() * 1000.0f;

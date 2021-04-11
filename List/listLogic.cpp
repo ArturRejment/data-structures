@@ -49,9 +49,7 @@ void fillLinkedListWithRandomData(LinkedList *list)
     for (int i = 0; i < size; i++)
     {
         int value = rand() % 300;
-        Timer timer;
         list->push_back(value);
-        time += timer.getTime().count() * 1000.0f;
     }
 }
 
@@ -65,7 +63,7 @@ void fillListForExperiment(LinkedList *list, int size)
     }
     for (int i = 0; i < size; i++)
     {
-        int value = rand() % 100000;
+        int value = rand() % 30000;
         list->push_back(value);
     }
 }
@@ -84,7 +82,7 @@ void linkedListExperiment(LinkedList *list)
     for (int i = 0; i < 100; i++)
     {
         fillListForExperiment(list, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         list->push_back(value);
         time += timer.getTime().count() * 1000.0f;
@@ -96,7 +94,7 @@ void linkedListExperiment(LinkedList *list)
     for (int i = 0; i < 100; i++)
     {
         fillListForExperiment(list, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         list->push_front(value);
         time += timer.getTime().count() * 1000.0f;
@@ -144,7 +142,7 @@ void linkedListExperiment(LinkedList *list)
     for (int i = 0; i < 100; i++)
     {
         fillListForExperiment(list, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         list->findElement(value);
         time += timer.getTime().count() * 1000.0f;

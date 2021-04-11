@@ -59,7 +59,7 @@ void fillHeapForExperiment(Heap *heap, int size)
     }
     for (int i = 0; i < size; i++)
     {
-        int value = rand() % 100000;
+        int value = rand() % 30000;
         heap->insert(value);
     }
 }
@@ -78,7 +78,7 @@ void heapExperiment(Heap *heap)
     for (int i = 0; i < 100; i++)
     {
         fillHeapForExperiment(heap, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         heap->insert(value);
         time += timer.getTime().count() * 1000.0f;
@@ -90,7 +90,7 @@ void heapExperiment(Heap *heap)
     for (int i = 0; i < 100; i++)
     {
         fillHeapForExperiment(heap, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         heap->deleteElement(value);
         time += timer.getTime().count() * 1000.0f;
@@ -102,7 +102,7 @@ void heapExperiment(Heap *heap)
     for (int i = 0; i < 100; i++)
     {
         fillHeapForExperiment(heap, size);
-        value = rand() % 100000;
+        value = rand() % 30000;
         Timer timer;
         heap->findElement(value);
         time += timer.getTime().count() * 1000.0f;
