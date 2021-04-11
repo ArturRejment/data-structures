@@ -102,18 +102,18 @@ void linkedListExperiment(LinkedList *list)
     cout << "Inserting element at the beginning of the double linked list took on average: " << time / 100 << " ms\n";
 
     //! Insert at random position
-    //     time = 0;
-    //     int position;
-    //     for (int i = 0; i < 100; i++)
-    //     {
-    //         fillListForExperiment(list, size);
-    //         value = rand() % 100000;
-    //         position = rand() % (size - 1);
-    //         Timer timer;
-    //         // TODO: Implement inserion on random position in linked list
-    //         time += timer.duration.count() * 1000.0f;
-    //     }
-    //     cout << "Inserting element at the beginning of the double linked list took on average: " << time / size << " ms\n";
+    time = 0;
+    int position;
+    for (int i = 0; i < 100; i++)
+    {
+        fillListForExperiment(list, size);
+        value = rand() % 100000;
+        position = rand() % (size - 1);
+        Timer timer;
+        list->insert(value, position);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Inserting element at the random position of the double linked list took on average: " << time / 100 << " ms\n";
 
     //! Deletion element form the end
     time = 0;

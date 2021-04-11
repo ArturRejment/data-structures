@@ -64,6 +64,15 @@ void LinkedList::push_front(int data)
     }
 }
 
+void LinkedList::deleteFromPos(int position)
+{
+    ListNode *temp;
+    for (int i = 0; temp != nullptr && i < position; i++)
+    {
+        temp = temp->next;
+    }
+}
+
 void LinkedList::pop_back()
 {
     if (tail == nullptr)

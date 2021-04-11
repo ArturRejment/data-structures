@@ -34,6 +34,7 @@ public:
     void pop_back();
     void pop_front();
     void insert(int, int);
+    void deleteFromPos(int);
     ListNode *findElement(int);
     static void printList(ListNode *);
     bool isEmpty();
