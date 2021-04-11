@@ -6,6 +6,12 @@ Heap::Heap()
 {
     this->size = 0;
     this->heap = nullptr;
+    cr = cl = cp = "  ";
+    cr[0] = 218;
+    cr[1] = 196;
+    cl[0] = 192;
+    cl[1] = 196;
+    cp[0] = 179;
 }
 
 void Heap::printHeap()

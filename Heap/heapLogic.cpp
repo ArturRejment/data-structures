@@ -4,10 +4,8 @@
 
 void deleteHeap(Heap *heap)
 {
-    Heap *temp = heap;
     Heap newHeap = Heap();
     *heap = newHeap;
-    free(temp);
 }
 
 void fillHeapFromFile(Heap *heap)
