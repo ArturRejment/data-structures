@@ -88,7 +88,7 @@ void arrayExperiment(Array *array)
         array->addElement(value);
         time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Inserting element at the end of the array took on average: " << time / testNumber << " ms\n";
+    cout << "Inserting element at the end of the array took on average: " << time / testNumber << " ns\n";
 
     //! Insert at the beginning
     time = 0;
@@ -100,7 +100,7 @@ void arrayExperiment(Array *array)
         array->addElementAtTheBegenning(value);
         time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Inserting element at the beginning of the array took on average: " << time / testNumber << " ms\n";
+    cout << "Inserting element at the beginning of the array took on average: " << time / testNumber << " ns\n";
 
     //! Insert at the position
     time = 0;
@@ -114,7 +114,7 @@ void arrayExperiment(Array *array)
         array->addElementOnPosition(value, position);
         time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Inserting element at the random position of the array took on average: " << time / testNumber << " ms\n";
+    cout << "Inserting element at the random position of the array took on average: " << time / testNumber << " ns\n";
 
     //! Delete from the end
     time = 0;
@@ -125,7 +125,7 @@ void arrayExperiment(Array *array)
         array->deleteFromTheEnd();
         time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Deleting element from the end of the array took on average: " << time / testNumber << " ms\n";
+    cout << "Deleting element from the end of the array took on average: " << time / testNumber << " ns\n";
 
     //! Delete from the beginning
     for (int i = 0; i < testNumber; i++)
@@ -135,7 +135,7 @@ void arrayExperiment(Array *array)
         array->deleteFromTheBeginning();
         time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Deleting element from the beginning of the array took on average: " << time / testNumber << " ms\n";
+    cout << "Deleting element from the beginning of the array took on average: " << time / testNumber << " ns\n";
 
     //! Delete from the random position
     for (int i = 0; i < testNumber; i++)
@@ -146,7 +146,7 @@ void arrayExperiment(Array *array)
         array->deleteElement(position);
         time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Deleting element from the random position in the array took on average: " << time / testNumber << " ms\n";
+    cout << "Deleting element from the random position in the array took on average: " << time / testNumber << " ns\n";
 
     //! Find element
     time = 0;
@@ -158,5 +158,5 @@ void arrayExperiment(Array *array)
         array->findElement(value);
         time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Finding element in the array took on average: " << time / testNumber << " ms\n";
+    cout << "Finding element in the array took on average: " << time / testNumber << " ns\n";
 }

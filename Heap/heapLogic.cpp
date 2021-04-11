@@ -87,9 +87,9 @@ void heapExperiment(Heap *heap)
         value = rand() % range;
         Timer timer;
         heap->insert(value);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Inserting element to the heap took on average: " << time / testNumber << " ms\n";
+    cout << "Inserting element to the heap took on average: " << time / testNumber << " ns\n";
 
     //! Delete element
     time = 0;
@@ -99,9 +99,9 @@ void heapExperiment(Heap *heap)
         value = rand() % range;
         Timer timer;
         heap->deleteElement(value);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Deleting element from the heap took on average: " << time / testNumber << " ms\n";
+    cout << "Deleting element from the heap took on average: " << time / testNumber << " ns\n";
 
     //! Find element
     time = 0;
@@ -111,7 +111,7 @@ void heapExperiment(Heap *heap)
         value = rand() % range;
         Timer timer;
         heap->findElement(value);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Finding element in the heap took on average: " << time / testNumber << " ms\n";
+    cout << "Finding element in the heap took on average: " << time / testNumber << " ns\n";
 }

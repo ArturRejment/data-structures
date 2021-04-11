@@ -91,9 +91,9 @@ void linkedListExperiment(LinkedList *list)
         value = rand() % range;
         Timer timer;
         list->push_back(value);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Inserting element at the end of the double linked list took on average: " << time / testNumber << " ms\n";
+    cout << "Inserting element at the end of the double linked list took on average: " << time / testNumber << " ns\n";
 
     //! Insert at the beginning
     time = 0;
@@ -103,9 +103,9 @@ void linkedListExperiment(LinkedList *list)
         value = rand() % range;
         Timer timer;
         list->push_front(value);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Inserting element at the beginning of the double linked list took on average: " << time / testNumber << " ms\n";
+    cout << "Inserting element at the beginning of the double linked list took on average: " << time / testNumber << " ns\n";
 
     //! Insert at random position
     time = 0;
@@ -117,9 +117,9 @@ void linkedListExperiment(LinkedList *list)
         position = rand() % (size - 1);
         Timer timer;
         list->insert(value, position);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Inserting element at the random position of the double linked list took on average: " << time / testNumber << " ms\n";
+    cout << "Inserting element at the random position of the double linked list took on average: " << time / testNumber << " ns\n";
 
     //! Deletion element form the end
     time = 0;
@@ -128,9 +128,9 @@ void linkedListExperiment(LinkedList *list)
         fillListForExperiment(list, size, range);
         Timer timer;
         list->pop_back();
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Deleting element from the end of the double linked list took on average: " << time / testNumber << " ms\n";
+    cout << "Deleting element from the end of the double linked list took on average: " << time / testNumber << " ns\n";
 
     //! Deletion element form the beginning
     time = 0;
@@ -139,9 +139,9 @@ void linkedListExperiment(LinkedList *list)
         fillListForExperiment(list, size, range);
         Timer timer;
         list->pop_front();
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Deleting element from the beginning of the double linked list took on average: " << time / testNumber << " ms\n";
+    cout << "Deleting element from the beginning of the double linked list took on average: " << time / testNumber << " ns\n";
 
     //! Finding element in the list
     time = 0;
@@ -151,7 +151,7 @@ void linkedListExperiment(LinkedList *list)
         value = rand() % range;
         Timer timer;
         list->findElement(value);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Finding element in the double linked list took on average: " << time / testNumber << " ms\n";
+    cout << "Finding element in the double linked list took on average: " << time / testNumber << " ns\n";
 }

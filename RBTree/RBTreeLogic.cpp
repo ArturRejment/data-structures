@@ -89,9 +89,9 @@ void treeExperiment(RBTree *tree)
         value = rand() % range;
         Timer timer;
         tree->insertElement(value);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Inserting element to the red-black tree took on average: " << time / testNumber << " ms\n";
+    cout << "Inserting element to the red-black tree took on average: " << time / testNumber << " ns\n";
 
     //! Delete element
     time = 0;
@@ -105,9 +105,9 @@ void treeExperiment(RBTree *tree)
         if (node == nullptr)
             continue;
         tree->deleteElement(node);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Deleting element form the red-black tree took on average: " << time / testNumber << " ms\n";
+    cout << "Deleting element form the red-black tree took on average: " << time / testNumber << " ns\n";
 
     //! Find element
     time = 0;
@@ -117,7 +117,7 @@ void treeExperiment(RBTree *tree)
         value = rand() % range;
         Timer timer;
         tree->find(value);
-        time += timer.getTime().count() * 1000.0f;
+        time += timer.getTime().count() * 1000000000.0f;
     }
-    cout << "Finding element in the red-black tree took on average: " << time / testNumber << " ms\n";
+    cout << "Finding element in the red-black tree took on average: " << time / testNumber << " ns\n";
 }
