@@ -53,7 +53,7 @@ void fillLinkedListWithRandomData(LinkedList *list)
     }
 }
 
-void fillListForExperiment(LinkedList *list, int size)
+void fillListForExperiment(LinkedList *list, int size, int range)
 {
     srand(time(NULL));
 
@@ -63,7 +63,7 @@ void fillListForExperiment(LinkedList *list, int size)
     }
     for (int i = 0; i < size; i++)
     {
-        int value = rand() % 30000;
+        int value = rand() % range;
         list->push_back(value);
     }
 }
@@ -71,81 +71,87 @@ void fillListForExperiment(LinkedList *list, int size)
 void linkedListExperiment(LinkedList *list)
 {
     srand(time(NULL));
-    int size, value;
+    int size, value, testNumber, range;
     float time;
 
     cout << "Please enter the size of the list: " << flush;
     cin >> size;
 
+    cout << "Please enter number of tests: " << flush;
+    cin >> testNumber;
+
+    cout << "Please enter maximum size of the arguments in structure: " << flush;
+    cin >> range;
+
     //! Insert at the end
     time = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size);
-        value = rand() % 30000;
+        fillListForExperiment(list, size, range);
+        value = rand() % range;
         Timer timer;
         list->push_back(value);
         time += timer.getTime().count() * 1000.0f;
     }
-    cout << "Inserting element at the end of the double linked list took on average: " << time / 100 << " ms\n";
+    cout << "Inserting element at the end of the double linked list took on average: " << time / testNumber << " ms\n";
 
     //! Insert at the beginning
     time = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size);
-        value = rand() % 30000;
+        fillListForExperiment(list, size, range);
+        value = rand() % range;
         Timer timer;
         list->push_front(value);
         time += timer.getTime().count() * 1000.0f;
     }
-    cout << "Inserting element at the beginning of the double linked list took on average: " << time / 100 << " ms\n";
+    cout << "Inserting element at the beginning of the double linked list took on average: " << time / testNumber << " ms\n";
 
     //! Insert at random position
     time = 0;
     int position;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size);
+        fillListForExperiment(list, size, range);
         value = rand() % 100000;
         position = rand() % (size - 1);
         Timer timer;
         list->insert(value, position);
         time += timer.getTime().count() * 1000.0f;
     }
-    cout << "Inserting element at the random position of the double linked list took on average: " << time / 100 << " ms\n";
+    cout << "Inserting element at the random position of the double linked list took on average: " << time / testNumber << " ms\n";
 
     //! Deletion element form the end
     time = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size);
+        fillListForExperiment(list, size, range);
         Timer timer;
         list->pop_back();
         time += timer.getTime().count() * 1000.0f;
     }
-    cout << "Deleting element from the end of the double linked list took on average: " << time / 100 << " ms\n";
+    cout << "Deleting element from the end of the double linked list took on average: " << time / testNumber << " ms\n";
 
     //! Deletion element form the beginning
     time = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size);
+        fillListForExperiment(list, size, range);
         Timer timer;
         list->pop_front();
         time += timer.getTime().count() * 1000.0f;
     }
-    cout << "Deleting element from the beginning of the double linked list took on average: " << time / 100 << " ms\n";
+    cout << "Deleting element from the beginning of the double linked list took on average: " << time / testNumber << " ms\n";
 
     //! Finding element in the list
     time = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size);
-        value = rand() % 30000;
+        fillListForExperiment(list, size, range);
+        value = rand() % range;
         Timer timer;
         list->findElement(value);
         time += timer.getTime().count() * 1000.0f;
     }
-    cout << "Finding element in the double linked list took on average: " << time / 100 << " ms\n";
+    cout << "Finding element in the double linked list took on average: " << time / testNumber << " ms\n";
 }

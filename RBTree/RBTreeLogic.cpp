@@ -51,7 +51,7 @@ void fillTreeWithRandomData(RBTree *tree)
     }
 }
 
-void fillTreeForExperiment(RBTree *tree, int size)
+void fillTreeForExperiment(RBTree *tree, int size, int range)
 {
     int value;
     if (!tree->isEmpty())
@@ -61,7 +61,7 @@ void fillTreeForExperiment(RBTree *tree, int size)
 
     for (int i = 0; i < size; i++)
     {
-        value = rand() % 30000;
+        value = rand() % range;
         tree->insertElement(value);
     }
 }
@@ -69,31 +69,37 @@ void fillTreeForExperiment(RBTree *tree, int size)
 void treeExperiment(RBTree *tree)
 {
     srand(time(NULL));
-    int size, value;
+    int size, value, testNumber, range;
     float time;
 
-    cout << "Please enter the size of the red-black tree: " << flush;
+    cout << "\nPlease enter the size of the red-black tree: " << flush;
     cin >> size;
+
+    cout << "Please enter number of tests: " << flush;
+    cin >> testNumber;
+
+    cout << "Please enter maximum size of the arguments in structure: " << flush;
+    cin >> range;
 
     //! Insert element
     time = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < testNumber; i++)
     {
-        fillTreeForExperiment(tree, size);
-        value = rand() % 30000;
+        fillTreeForExperiment(tree, size, range);
+        value = rand() % range;
         Timer timer;
         tree->insertElement(value);
         time += timer.getTime().count() * 1000.0f;
     }
-    cout << "Inserting element to the red-black tree took on average: " << time / 100 << " ms\n";
+    cout << "Inserting element to the red-black tree took on average: " << time / testNumber << " ms\n";
 
     //! Delete element
     time = 0;
     RBNode *node;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < testNumber; i++)
     {
-        fillTreeForExperiment(tree, size);
-        value = rand() % 30000;
+        fillTreeForExperiment(tree, size, range);
+        value = rand() % range;
         Timer timer;
         node = tree->find(value);
         if (node == nullptr)
@@ -101,17 +107,17 @@ void treeExperiment(RBTree *tree)
         tree->deleteElement(node);
         time += timer.getTime().count() * 1000.0f;
     }
-    cout << "Deleting element form the red-black tree took on average: " << time / 100 << " ms\n";
+    cout << "Deleting element form the red-black tree took on average: " << time / testNumber << " ms\n";
 
     //! Find element
     time = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < testNumber; i++)
     {
-        fillTreeForExperiment(tree, size);
-        value = rand() % 30000;
+        fillTreeForExperiment(tree, size, range);
+        value = rand() % range;
         Timer timer;
         tree->find(value);
         time += timer.getTime().count() * 1000.0f;
     }
-    cout << "Finding element in the red-black tree took on average: " << time / 100 << " ms\n";
+    cout << "Finding element in the red-black tree took on average: " << time / testNumber << " ms\n";
 }
