@@ -3,6 +3,7 @@ class Heap
 private:
     int size;
     int *heap;
+    string cr, cl, cp;
 
     int parent(int i) { return i >> 1; };           // i/2
     int leftChild(int i) { return i << 1; };        // i*2
