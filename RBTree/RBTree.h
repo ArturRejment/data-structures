@@ -26,6 +26,7 @@ class RBTree
 {
 private:
     RBNode *root;
+    string cr, cl, cp;
 
 public:
     RBTree();
@@ -45,4 +46,5 @@ public:
     RBNode *getSibling(RBNode *);
     void fixDoubleBlack(RBNode *);
     void deleteTree(RBNode *node);
+    void inorderH(string, string, RBNode *);
 };

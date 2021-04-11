@@ -5,6 +5,12 @@ using namespace std;
 RBTree ::RBTree()
 {
     root = nullptr;
+    cr = cl = cp = "  ";
+    cr[0] = 218;
+    cr[1] = 196;
+    cl[0] = 192;
+    cl[1] = 196;
+    cp[0] = 179;
 }
 
 RBNode *RBTree::getRoot()
@@ -449,17 +455,30 @@ void RBTree::restoreRBTreeProperties(RBNode *&newNode)
     root->color = BLACK;
 }
 
-void inorderH(RBNode *root)
+void RBTree::inorderH(string sp, string sn, RBNode *node)
 {
-    if (root == nullptr)
-        return;
+    string t;
+    char color;
 
-    inorderH(root->leftChild);
-    cout << root->data << " ";
-    inorderH(root->rightChild);
+    if (node != nullptr)
+    {
+        t = sp;
+        if (sn == cr)
+            t[t.length() - 2] = ' ';
+        inorderH(t + cp, cr, node->rightChild);
+
+        t = t.substr(0, sp.length() - 2);
+        node->color == RED ? color = 'R' : color = 'B';
+        cout << t << sn << color << ":" << node->data << endl;
+
+        t = sp;
+        if (sn == cl)
+            t[t.length() - 2] = ' ';
+        inorderH(t + cp, cl, node->leftChild);
+    }
 }
 
 void RBTree::inorder()
 {
-    inorderH(root);
+    inorderH("", "", root);
 }
