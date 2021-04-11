@@ -39,6 +39,10 @@ void arrayMenu()
     do
     {
         cout << "------------- ARRAY MENU -------------" << endl;
+        cout << "[a] Add element at the beginning\n";
+        cout << "[b] Add element at the position\n";
+        cout << "[c] Delete element from the beginning\n";
+        cout << "[d] Delete element from the position\n";
         printDefaultMenu();
         cout << "\n";
 
@@ -48,6 +52,26 @@ void arrayMenu()
 
         switch (choice)
         {
+        case 'a':
+            array.addElementAtTheBegenning(askForValue());
+            system("cls");
+            break;
+        case 'b':
+            cout << "Enter position: ";
+            cin >> pos;
+            array.addElementOnPosition(askForValue(), pos);
+            system("cls");
+            break;
+        case 'c':
+            array.deleteFromTheBeginning();
+            system("cls");
+            break;
+        case 'd':
+            cout << "Enter position: ";
+            cin >> pos;
+            array.deleteElement(pos);
+            system("cls");
+            break;
         case '1':
             array.addElement(askForValue());
             system("cls");
@@ -95,13 +119,37 @@ void listMenu()
     do
     {
         cout << "------------- LINKED LIST MENU -------------" << endl;
+        cout << "[a] Add element at the beginning\n";
+        cout << "[b] Add element at the position\n";
+        cout << "[c] Delete element from the beginning\n";
+        cout << "[d] Delete element from the position\n";
         printDefaultMenu();
 
         char choice = getch();
         int val;
+        int pos;
 
         switch (choice)
         {
+        case 'a':
+            list.push_front(askForValue());
+            system("cls");
+            break;
+        case 'b':
+            cout << "Enter position: ";
+            cin >> pos;
+            list.insert(askForValue(), pos);
+            system("cls");
+            break;
+        case 'c':
+            list.pop_front();
+            system("cls");
+            break;
+        case 'd':
+            cout << "Enter position: ";
+            cin >> pos;
+            system("cls");
+            break;
         case '1':
             list.push_back(askForValue());
             system("cls");
@@ -341,6 +389,7 @@ void printTestingMenu()
 
 void selectMode()
 {
+    system("cls");
     cout << "-------------- START ----------------\n";
     cout << "[1] Experiment mode\n";
     cout << "[2] Testing mode\n";

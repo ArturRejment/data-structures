@@ -33,6 +33,7 @@ public:
     void push_front(int);
     void pop_back();
     void pop_front();
+    void insert(int, int);
     ListNode *findElement(int);
     static void printList(ListNode *);
     bool isEmpty();

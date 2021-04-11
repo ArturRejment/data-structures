@@ -93,6 +93,30 @@ void LinkedList::pop_front()
     free(temp);
 }
 
+void LinkedList::insert(int value, int position)
+{
+    ListNode *temp = head;
+    if (position == 0)
+        push_front(value);
+
+    for (int i = 0; temp != nullptr && i < position - 3; i++)
+    {
+        temp = temp->next;
+    }
+
+    if (temp == nullptr)
+        return;
+
+    ListNode *newNode = new ListNode(value);
+    newNode->next = temp->next;
+    newNode->prev = temp;
+    temp->next = newNode;
+    if (newNode->next != nullptr)
+    {
+        newNode->next->prev = newNode;
+    }
+}
+
 ListNode *LinkedList::findElement(int val)
 {
 
