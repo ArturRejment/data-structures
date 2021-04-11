@@ -21,7 +21,7 @@ void printDefaultMenu()
     cout << "[4] Fill structure with values from the file\n";
     cout << "[5] Find element\n";
     cout << "[6] Print structure\n";
-    cout << "[7] cls structure\n";
+    cout << "[7] Clear structure\n";
     cout << "[8] Return\n";
     cout << "Press key with your choice" << flush;
 }
@@ -29,17 +29,19 @@ void printDefaultMenu()
 int askForValue()
 {
     int val;
-    cout << "Enter value: ";
+    cout << "\nEnter value: ";
     cin >> val;
     return val;
 }
 
 void arrayMenu()
 {
+    system("cls");
     do
     {
         cout << "------------- ARRAY MENU -------------" << endl;
         printDefaultMenu();
+        cout << "\n";
 
         char choice = getch();
         int val;
@@ -49,26 +51,35 @@ void arrayMenu()
         {
         case '1':
             array.addElement(askForValue());
+            system("cls");
             break;
         case '2':
             array.deleteElement(askForValue());
+            system("cls");
             break;
         case '3':
             fillArrayWithRandomData(&array);
+            system("cls");
             break;
         case '4':
             fillArrayFromFile(&array);
+            system("cls");
             break;
         case '5':
             array.findElement(askForValue());
+            system("cls");
             break;
         case '6':
+            system("cls");
             array.printArray();
+            cout << "\n\n";
             break;
         case '7':
             deleteArray(&array);
+            system("cls");
             break;
         case '8':
+            system("cls");
             return;
             break;
 
@@ -81,6 +92,7 @@ void arrayMenu()
 
 void listMenu()
 {
+    system("cls");
     do
     {
         cout << "------------- LINKED LIST MENU -------------" << endl;
@@ -93,15 +105,19 @@ void listMenu()
         {
         case '1':
             list.push_back(askForValue());
+            system("cls");
             break;
         case '2':
             list.pop_back();
+            system("cls");
             break;
         case '3':
             fillLinkedListWithRandomData(&list);
+            system("cls");
             break;
         case '4':
             fillLinkedListFromFile(&list);
+            system("cls");
             break;
         case '5':
             ListNode *elem;
@@ -110,12 +126,16 @@ void listMenu()
                 elem->printData();
             else
                 cout << "Element " << val << " is not in the List" << endl;
+            system("cls");
             break;
         case '6':
+            system("cls");
             list.printList();
+            cout << "\n\n";
             break;
         case '7':
             deleteList(&list);
+            system("cls");
             break;
         case '8':
             return;
@@ -128,6 +148,7 @@ void listMenu()
 
 void heapMenu()
 {
+    system("cls");
     do
     {
         cout << "------------- BINARY HEAP MENU -------------" << endl;
@@ -140,23 +161,32 @@ void heapMenu()
         {
         case '1':
             heap.insert(askForValue());
+            system("cls");
             break;
         case '2':
             heap.deleteElement(askForValue());
+            system("cls");
             break;
         case '3':
             fillHeapWithRandomData(&heap);
+            system("cls");
             break;
         case '4':
             fillHeapFromFile(&heap);
+            system("cls");
             break;
         case '5':
             heap.findElement(askForValue());
+            system("cls");
+            break;
         case '6':
+            system("cls");
             heap.printHeap();
+            cout << "\n\n";
             break;
         case '7':
             deleteHeap(&heap);
+            system("cls");
             break;
         case '8':
             return;
@@ -170,6 +200,7 @@ void heapMenu()
 
 void treeMenu()
 {
+    system("cls");
     do
     {
         cout << "------------- RED-BLACK TREE MENU -------------" << endl;
@@ -182,15 +213,19 @@ void treeMenu()
         {
         case '1':
             tree.insertElement(askForValue());
+            system("cls");
             break;
         case '2':
             tree.deleteElement(askForValue());
+            system("cls");
             break;
         case '3':
             fillTreeWithRandomData(&tree);
+            system("cls");
             break;
         case '4':
             fillTreeFromFile(&tree);
+            system("cls");
             break;
         case '5':
             RBNode *temp;
@@ -199,12 +234,16 @@ void treeMenu()
                 cout << "Found " << val;
             else
                 cout << "Element " << val << " is not in the structure\n";
+            system("cls");
             break;
         case '6':
+            system("cls");
             tree.inorder();
+            cout << "\n\n";
             break;
         case '7':
             deleteTree(&tree);
+            system("cls");
             break;
         case '8':
             return;
