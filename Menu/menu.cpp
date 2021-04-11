@@ -30,14 +30,7 @@ int askForValue()
 {
     int val;
     cout << "Enter value: ";
-    try
-    {
-        cin >> val;
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    cin >> val;
     return val;
 }
 
@@ -191,7 +184,7 @@ void treeMenu()
             tree.insertElement(askForValue());
             break;
         case '2':
-            tree.deleteElement(tree.find(askForValue()));
+            tree.deleteElement(askForValue());
             break;
         case '3':
             fillTreeWithRandomData(&tree);
@@ -247,7 +240,7 @@ void printExperimentMenu()
         heapExperiment(&heap);
         break;
     case '4':
-        treeMenu();
+        treeExperiment(&tree);
         break;
     case '5':
         return;

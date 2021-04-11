@@ -4,7 +4,8 @@
 
 void deleteTree(RBTree *tree)
 {
-    tree->deleteTree(tree->getRoot());
+    RBTree newTree = RBTree();
+    *tree = newTree;
 }
 
 void fillTreeFromFile(RBTree *tree)
@@ -87,16 +88,26 @@ void treeExperiment(RBTree *tree)
     cout << "Inserting element to the red-black tree took on average: " << time / 100 << " ms\n";
 
     //! Delete element
-    RBNode *node;
     time = 0;
     for (int i = 0; i < 100; i++)
     {
         fillTreeForExperiment(tree, size);
         value = rand() % 100000;
-        node = tree->find(value);
         Timer timer;
-        tree->deleteElement(node);
+        tree->deleteElement(value);
         time += timer.getTime().count() * 1000.0f;
     }
     cout << "Deleting element form the red-black tree took on average: " << time / 100 << " ms\n";
+
+    //! Find element
+    time = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        fillTreeForExperiment(tree, size);
+        value = rand() % 100000;
+        Timer timer;
+        tree->find(value);
+        time += timer.getTime().count() * 1000.0f;
+    }
+    cout << "Finding element in the red-black tree took on average: " << time / 100 << " ms\n";
 }

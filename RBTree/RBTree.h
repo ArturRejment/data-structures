@@ -41,7 +41,7 @@ public:
     void insertElement(int value);
     RBNode *insertElementNormalBST(RBNode *root, RBNode *node);
     void restoreRBTreeProperties(RBNode *&node);
-    void deleteElement(RBNode *node);
+    void deleteElement(int);
     RBNode *getSibling(RBNode *);
     void fixDoubleBlack(RBNode *);
     void deleteTree(RBNode *node);

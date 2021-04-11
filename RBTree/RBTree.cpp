@@ -61,7 +61,6 @@ RBNode *RBTree::find(int value)
     }
     if (temp == nullptr)
         return nullptr;
-    cout << "Found " << temp->data << " in the tree bro\n";
     return temp;
 }
 
@@ -164,8 +163,11 @@ RBNode *getSibling(RBNode *node)
 }
 
 // deletes the given node
-void RBTree::deleteElement(RBNode *deletingNode)
+void RBTree::deleteElement(int value)
 {
+    RBNode *deletingNode = find(value);
+    if (deletingNode == nullptr)
+        return;
     RBNode *u;
     if (deletingNode->leftChild != nullptr and deletingNode->rightChild != nullptr)
         u = findSuccessor(deletingNode->rightChild);
@@ -261,7 +263,7 @@ void RBTree::deleteElement(RBNode *deletingNode)
 
     // deletingNode has 2 children, swap values with successor and recurse
     swap(u->data, deletingNode->data);
-    deleteElement(u);
+    deleteElement(u->data);
 }
 
 void RBTree::fixDoubleBlack(RBNode *x)
