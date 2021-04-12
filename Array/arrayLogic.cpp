@@ -2,10 +2,10 @@
 #include <math.h>
 #include "array.cpp"
 
-void deleteArray(Array *array)
+void deleteArray(Array **array)
 {
-    Array newArray = Array();
-    *array = newArray;
+    delete *array;
+    *array = new Array();
 }
 
 void fillArrayFromFile(Array *array)
@@ -49,20 +49,17 @@ void fillArrayWithRandomData(Array *array)
     }
 }
 
-void fillArrayforExperiment(Array *array, int size, int range)
+void fillArrayforExperiment(Array **array, int size, int range)
 {
-    if (!array->isEmpty())
-    {
-        deleteArray(array);
-    }
+    deleteArray(array);
     for (int i = 0; i < size; i++)
     {
         int value = rand() % range;
-        array->addElement(value);
+        (*array)->addElement(value);
     }
 }
 
-void arrayExperiment(Array *array)
+void arrayExperiment(Array *&array)
 {
     srand(time(NULL));
 
@@ -82,7 +79,7 @@ void arrayExperiment(Array *array)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillArrayforExperiment(array, size, range);
+        fillArrayforExperiment(&array, size, range);
         value = rand() % range;
         Timer timer;
         array->addElement(value);
@@ -94,7 +91,7 @@ void arrayExperiment(Array *array)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillArrayforExperiment(array, size, range);
+        fillArrayforExperiment(&array, size, range);
         value = rand() % range;
         Timer timer;
         array->addElementAtTheBegenning(value);
@@ -107,7 +104,7 @@ void arrayExperiment(Array *array)
     int position;
     for (int i = 0; i < testNumber; i++)
     {
-        fillArrayforExperiment(array, size, range);
+        fillArrayforExperiment(&array, size, range);
         value = rand() % range;
         position = rand() % (size - 1);
         Timer timer;
@@ -120,7 +117,7 @@ void arrayExperiment(Array *array)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillArrayforExperiment(array, size, range);
+        fillArrayforExperiment(&array, size, range);
         Timer timer;
         array->deleteFromTheEnd();
         time += timer.getTime().count() * 1000000000.0f;
@@ -130,7 +127,7 @@ void arrayExperiment(Array *array)
     //! Delete from the beginning
     for (int i = 0; i < testNumber; i++)
     {
-        fillArrayforExperiment(array, size, range);
+        fillArrayforExperiment(&array, size, range);
         Timer timer;
         array->deleteFromTheBeginning();
         time += timer.getTime().count() * 1000000000.0f;
@@ -140,7 +137,7 @@ void arrayExperiment(Array *array)
     //! Delete from the random position
     for (int i = 0; i < testNumber; i++)
     {
-        fillArrayforExperiment(array, size, range);
+        fillArrayforExperiment(&array, size, range);
         position = rand() % (size - 1);
         Timer timer;
         array->deleteElement(position);
@@ -152,7 +149,7 @@ void arrayExperiment(Array *array)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillArrayforExperiment(array, size, range);
+        fillArrayforExperiment(&array, size, range);
         value = rand() % range;
         Timer timer;
         array->findElement(value);

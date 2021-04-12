@@ -12,7 +12,7 @@ Array::Array()
 
 Array::~Array()
 {
-    return;
+    delete[] array;
 }
 
 bool Array::isEmpty()
@@ -68,7 +68,7 @@ void Array::addElementAtTheBegenning(int value)
     {
         array[i] = array[i - 1];
     }
-    array[i] = value;
+    array[0] = value;
 }
 
 void Array::printArray()
@@ -88,12 +88,16 @@ void Array::printArray()
 
 void Array::deleteFromTheEnd()
 {
+    if (size == 0)
+        return;
     size--;
     array = (int *)realloc(array, size * sizeof(int));
 }
 
 void Array::deleteFromTheBeginning()
 {
+    if (size == 0)
+        return;
     for (int i = 0; i < size; i++)
     {
         array[i] = array[i + 1];
@@ -104,6 +108,8 @@ void Array::deleteFromTheBeginning()
 
 void Array::deleteElement(int position)
 {
+    if (size == 0)
+        return;
     for (int i = position; i < size; i++)
     {
         array[i] = array[i + 1];

@@ -8,7 +8,7 @@ using namespace std;
 
 //* Structures Declaration
 LinkedList list = LinkedList();
-Array array = Array();
+Array *array = new Array();
 Heap heap = Heap();
 RBTree tree = RBTree();
 
@@ -53,53 +53,54 @@ void arrayMenu()
         switch (choice)
         {
         case 'a':
-            array.addElementAtTheBegenning(askForValue());
+            array->addElementAtTheBegenning(askForValue());
             system("cls");
             break;
         case 'b':
             cout << "Enter position: ";
             cin >> pos;
-            array.addElementOnPosition(askForValue(), pos);
+            array->addElementOnPosition(askForValue(), pos);
             system("cls");
             break;
         case 'c':
-            array.deleteFromTheBeginning();
+            array->deleteFromTheBeginning();
             system("cls");
             break;
         case 'd':
             cout << "Enter position: ";
             cin >> pos;
-            array.deleteElement(pos);
+            array->deleteElement(pos);
             system("cls");
             break;
         case '1':
-            array.addElement(askForValue());
+            array->addElement(askForValue());
             system("cls");
             break;
         case '2':
-            array.deleteElement(askForValue());
+            array->deleteElement(askForValue());
             system("cls");
             break;
         case '3':
-            fillArrayWithRandomData(&array);
+            fillArrayWithRandomData(array);
             system("cls");
             break;
         case '4':
-            fillArrayFromFile(&array);
+            fillArrayFromFile(array);
             system("cls");
             break;
         case '5':
-            array.findElement(askForValue());
+            array->findElement(askForValue());
             system("cls");
             break;
         case '6':
             system("cls");
-            array.printArray();
+            array->printArray();
             cout << "\n\n";
             break;
         case '7':
             deleteArray(&array);
             system("cls");
+            cout << "pls delete";
             break;
         case '8':
             system("cls");
@@ -182,7 +183,9 @@ void listMenu()
             cout << "\n\n";
             break;
         case '7':
-            deleteList(&list);
+            delete &list;
+            cout << " Deleted";
+            list = LinkedList();
             system("cls");
             break;
         case '8':
@@ -307,46 +310,57 @@ void printExperimentMenu()
     char choice;
     system("cls");
 
-    cout << "------------- EXPERIMENT MENU -------------" << endl;
-    cout << "[1] Experiment on a Array" << endl;
-    cout << "[2] Experiment on a Linked list" << endl;
-    cout << "[3] Experiment on a Binary heap" << endl;
-    cout << "[4] Experiment on a Red-black tree" << endl;
-    cout << "[5] Experiment on all structures" << endl;
-    cout << "[6] Exit" << endl;
-
-    choice = getch();
-    switch (choice)
+    do
     {
-    case '1':
-        arrayExperiment(&array);
-        break;
-    case '2':
-        linkedListExperiment(&list);
-        break;
-    case '3':
-        heapExperiment(&heap);
-        break;
-    case '4':
-        treeExperiment(&tree);
-        break;
-    case '5':
-        cout << "ARRAY:\n";
-        arrayExperiment(&array);
-        cout << "LIST:\n";
-        linkedListExperiment(&list);
-        cout << "HEAP:\n";
-        heapExperiment(&heap);
-        cout << "TREE:\n";
-        treeExperiment(&tree);
-        break;
-    case '6':
-        return;
-        break;
-    default:
-        return;
-        break;
-    }
+        cout << "------------- EXPERIMENT MENU -------------" << endl;
+        cout << "[1] Experiment on a Array" << endl;
+        cout << "[2] Experiment on a Linked list" << endl;
+        cout << "[3] Experiment on a Binary heap" << endl;
+        cout << "[4] Experiment on a Red-black tree" << endl;
+        cout << "[5] Experiment on all structures" << endl;
+        cout << "[6] Exit" << endl;
+
+        choice = getch();
+        switch (choice)
+        {
+        case '1':
+            system("cls");
+            arrayExperiment(array);
+            break;
+        case '2':
+            system("cls");
+            linkedListExperiment(&list);
+
+            break;
+        case '3':
+            system("cls");
+            heapExperiment(&heap);
+
+            break;
+        case '4':
+            system("cls");
+            treeExperiment(&tree);
+
+            break;
+        case '5':
+            system("cls");
+            cout << "ARRAY:\n";
+            arrayExperiment(array);
+            cout << "LIST:\n";
+            linkedListExperiment(&list);
+            cout << "HEAP:\n";
+            heapExperiment(&heap);
+            cout << "TREE:\n";
+            treeExperiment(&tree);
+
+            break;
+        case '6':
+            return;
+            break;
+        default:
+            break;
+        }
+    } while (true);
 }
 
 void printTestingMenu()
@@ -391,23 +405,28 @@ void printTestingMenu()
 void selectMode()
 {
     system("cls");
-    cout << "-------------- START ----------------\n";
-    cout << "[1] Experiment mode\n";
-    cout << "[2] Testing mode\n";
-    cout << "[3] Exit program\n";
-    cout << "Press key with your choice\n";
-
-    char choice = getch();
-    switch (choice)
+    do
     {
-    case '1':
-        printExperimentMenu();
-        break;
-    case '2':
-        printTestingMenu();
-        break;
+        cout << "-------------- START ----------------\n";
+        cout << "[1] Experiment mode\n";
+        cout << "[2] Testing mode\n";
+        cout << "[3] Exit program\n";
+        cout << "Press key with your choice\n";
 
-    default:
-        break;
-    }
+        char choice = getch();
+        switch (choice)
+        {
+        case '1':
+            printExperimentMenu();
+            system("cls");
+            break;
+        case '2':
+            printTestingMenu();
+            system("cls");
+            break;
+        default:
+            return;
+            break;
+        }
+    } while (true);
 }

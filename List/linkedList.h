@@ -28,6 +28,7 @@ private:
 
 public:
     LinkedList();
+    ~LinkedList();
     void printList();
     void push_back(int);
     void push_front(int);
@@ -38,4 +39,5 @@ public:
     ListNode *findElement(int);
     static void printList(ListNode *);
     bool isEmpty();
+    void pop_node(ListNode *);
 };

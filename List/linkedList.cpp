@@ -9,6 +9,12 @@ LinkedList::LinkedList()
     this->tail = nullptr;
 }
 
+LinkedList::~LinkedList()
+{
+    while (head != nullptr)
+        pop_front();
+}
+
 bool LinkedList::isEmpty()
 {
     if (head == nullptr)
@@ -66,58 +72,29 @@ void LinkedList::push_front(int data)
 
 void LinkedList::deleteFromPos(int position)
 {
+
     ListNode *temp = head;
     for (int i = 0; temp != nullptr && i < position; i++)
     {
         temp = temp->next;
     }
 
-    if (temp == nullptr)
-        return;
-
-    if (temp->prev)
-        temp->prev->next = temp->next;
-    else
-        head = temp->next;
-
-    if (temp->next)
-        temp->next->prev = temp->prev;
-    else
-        tail = temp->prev;
-
-    free(temp);
+    pop_node(temp);
 }
 
 void LinkedList::pop_back()
 {
-    if (tail == nullptr)
-    {
-        cout << "List is already empty!\n";
-        return;
-    }
-
-    ListNode *temp = tail;
-    tail->prev->next = nullptr;
-    tail = tail->prev;
-    free(temp);
+    pop_node(tail);
 }
 
 void LinkedList::pop_front()
 {
-    if (head == nullptr)
-    {
-        cout << "List is already empty!\n";
-        return;
-    }
-
-    ListNode *temp = head;
-    head = head->next;
-    head->prev = nullptr;
-    free(temp);
+    pop_node(head);
 }
 
 void LinkedList::insert(int value, int position)
 {
+
     ListNode *temp = head;
     if (position == 0)
         push_front(value);
@@ -138,6 +115,23 @@ void LinkedList::insert(int value, int position)
     {
         newNode->next->prev = newNode;
     }
+}
+
+void LinkedList::pop_node(ListNode *node)
+{
+    if (node == nullptr)
+        return;
+    if (node->prev)
+        node->prev->next = node->next;
+    else
+        head = node->next;
+
+    if (node->next)
+        node->next->prev = node->prev;
+    else
+        tail = node->prev;
+
+    free(node);
 }
 
 ListNode *LinkedList::findElement(int val)
