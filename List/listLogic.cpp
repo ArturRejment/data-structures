@@ -5,10 +5,8 @@
 
 void deleteList(LinkedList *list)
 {
-    LinkedList *temp = list;
     LinkedList newList = LinkedList();
     *list = newList;
-    delete temp;
 }
 
 void fillLinkedListFromFile(LinkedList *list)
