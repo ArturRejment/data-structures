@@ -148,6 +148,7 @@ void listMenu()
         case 'd':
             cout << "Enter position: ";
             cin >> pos;
+            list.deleteFromPos(pos);
             system("cls");
             break;
         case '1':

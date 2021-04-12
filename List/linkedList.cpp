@@ -66,11 +66,26 @@ void LinkedList::push_front(int data)
 
 void LinkedList::deleteFromPos(int position)
 {
-    ListNode *temp;
+    ListNode *temp = head;
     for (int i = 0; temp != nullptr && i < position; i++)
     {
         temp = temp->next;
     }
+
+    if (temp == nullptr)
+        return;
+
+    if (temp->prev)
+        temp->prev->next = temp->next;
+    else
+        head = temp->next;
+
+    if (temp->next)
+        temp->next->prev = temp->prev;
+    else
+        tail = temp->prev;
+
+    free(temp);
 }
 
 void LinkedList::pop_back()
@@ -89,7 +104,6 @@ void LinkedList::pop_back()
 
 void LinkedList::pop_front()
 {
-
     if (head == nullptr)
     {
         cout << "List is already empty!\n";

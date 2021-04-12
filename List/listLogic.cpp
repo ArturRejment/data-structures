@@ -132,6 +132,17 @@ void linkedListExperiment(LinkedList *list)
     }
     cout << "Deleting element from the end of the double linked list took on average: " << time / testNumber << " ns\n";
 
+    //! Deletion element fotm the position
+    time = 0;
+    for (int i = 0; i < testNumber; i++)
+    {
+        fillListForExperiment(list, size, range);
+        position = rand() & (size - 1);
+        Timer timer;
+        list->deleteFromPos(position);
+        time += timer.getTime().count() * 1000000000.0f;
+    }
+
     //! Deletion element form the beginning
     time = 0;
     for (int i = 0; i < testNumber; i++)
