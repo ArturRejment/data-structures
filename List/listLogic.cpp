@@ -14,7 +14,7 @@ void fillLinkedListFromFile(LinkedList *list)
 {
     // Open file and check if it opened with success
     fstream file;
-    file.open("data.txt", ios::in);
+    file.open("./data.txt", ios::in);
     if (!file.is_open())
     {
         cout << "[LinkedList] Cannot open data.txt\n";
@@ -27,11 +27,13 @@ void fillLinkedListFromFile(LinkedList *list)
     file >> size;
 
     // All the next values are elements
-    while (!file.eof())
+    for (int i = 0; i < size; i++)
     {
         file >> data;
         list->push_back(data);
     }
+    cout << "Filled with success!\n";
+    file.close();
 }
 
 // Fill list with random values for testing

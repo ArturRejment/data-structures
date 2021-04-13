@@ -13,7 +13,7 @@ void fillArrayFromFile(Array *array)
 {
     // Open file and check if it opened with success
     fstream file;
-    file.open("data.txt", ios::in);
+    file.open("./data.txt", ios::in);
 
     if (!file.is_open())
     {
@@ -27,11 +27,13 @@ void fillArrayFromFile(Array *array)
     file >> size;
 
     // All the next values are elements
-    while ((!file.eof()))
+    for (int i = 0; i < size; i++)
     {
         file >> data;
         array->addElement(data);
     }
+    cout << "Filled with success!\n";
+    file.close();
 }
 
 // Fill array with random values for testing

@@ -60,40 +60,40 @@ void arrayMenu()
             system("cls");
             break;
         case 'b':
+            system("cls");
             cout << "\nEnter position: ";
             cin >> pos;
             array->addElementOnPosition(askForValue(), pos);
-            system("cls");
             break;
         case 'c':
-            array->deleteFromTheBeginning();
             system("cls");
+            array->deleteFromTheBeginning();
             break;
         case 'd':
+            system("cls");
             cout << "\nEnter position: ";
             cin >> pos;
             array->deleteElement(pos);
-            system("cls");
             break;
         case '1':
-            array->addElement(askForValue());
             system("cls");
+            array->addElement(askForValue());
             break;
         case '2':
-            array->deleteElement(askForValue());
             system("cls");
+            array->deleteElement(askForValue());
             break;
         case '3':
-            fillArrayWithRandomData(array);
             system("cls");
+            fillArrayWithRandomData(array);
             break;
         case '4':
-            fillArrayFromFile(array);
             system("cls");
+            fillArrayFromFile(array);
             break;
         case '5':
-            array->findElement(askForValue());
             system("cls");
+            array->findElement(askForValue());
             break;
         case '6':
             system("cls");
@@ -101,8 +101,8 @@ void arrayMenu()
             cout << "\n\n";
             break;
         case '7':
-            deleteArray(&array);
             system("cls");
+            deleteArray(&array);
             break;
         case '8':
             system("cls");
@@ -136,40 +136,40 @@ void listMenu()
         switch (choice)
         {
         case 'a':
-            list->push_front(askForValue());
             system("cls");
+            list->push_front(askForValue());
             break;
         case 'b':
+            system("cls");
             cout << "\nEnter position: ";
             cin >> pos;
             list->insert(askForValue(), pos);
-            system("cls");
             break;
         case 'c':
-            list->pop_front();
             system("cls");
+            list->pop_front();
             break;
         case 'd':
+            system("cls");
             cout << "\nEnter position: ";
             cin >> pos;
             list->deleteFromPos(pos);
-            system("cls");
             break;
         case '1':
-            list->push_back(askForValue());
             system("cls");
+            list->push_back(askForValue());
             break;
         case '2':
-            list->pop_back();
             system("cls");
+            list->pop_back();
             break;
         case '3':
-            fillLinkedListWithRandomData(list);
             system("cls");
+            fillLinkedListWithRandomData(list);
             break;
         case '4':
-            fillLinkedListFromFile(list);
             system("cls");
+            fillLinkedListFromFile(list);
             break;
         case '5':
             system("cls");
@@ -183,11 +183,12 @@ void listMenu()
         case '6':
             system("cls");
             list->printList();
-            cout << "\n\n";
+            cout << "\n";
             break;
         case '7':
-            deleteList(&list);
             system("cls");
+            deleteList(&list);
+            cout << "Deleted!\n";
             break;
         case '8':
             return;
@@ -213,33 +214,36 @@ void heapMenu()
         switch (choice)
         {
         case '1':
-            heap->insert(askForValue());
             system("cls");
+            heap->insert(askForValue());
+            cout << "Inserted!\n";
             break;
         case '2':
-            heap->deleteElement(askForValue());
             system("cls");
+            heap->deleteElement(askForValue());
+            cout << "Deleted!\n";
             break;
         case '3':
-            fillHeapWithRandomData(heap);
             system("cls");
+            fillHeapWithRandomData(heap);
             break;
         case '4':
-            fillHeapFromFile(heap);
             system("cls");
+            fillHeapFromFile(heap);
             break;
         case '5':
-            heap->findElement(askForValue());
             system("cls");
+            heap->findElement(askForValue());
             break;
         case '6':
             system("cls");
             heap->printHeap();
-            cout << "\n\n";
+            cout << "\n";
             break;
         case '7':
-            deleteHeap(&heap);
             system("cls");
+            deleteHeap(&heap);
+            cout << "Deleted!\n";
             break;
         case '8':
             return;
@@ -267,34 +271,35 @@ void treeMenu()
         switch (choice)
         {
         case '1':
-            tree->insertElement(askForValue());
             system("cls");
+            tree->insertElement(askForValue());
+            cout << "Inserted!\n";
             break;
         case '2':
-            tree->deleteElement(tree->find(askForValue()));
             system("cls");
+            tree->deleteElement(tree->find(askForValue()));
             break;
         case '3':
-            fillTreeWithRandomData(tree);
             system("cls");
+            fillTreeWithRandomData(tree);
             break;
         case '4':
-            fillTreeFromFile(tree);
             system("cls");
+            fillTreeFromFile(tree);
             break;
         case '5':
+            system("cls");
             RBNode *temp;
             temp = tree->find(askForValue());
             if (temp != nullptr)
                 cout << "Found element!\n";
             else
                 cout << "Element is not in the structure\n";
-            system("cls");
             break;
         case '6':
             system("cls");
             tree->inorder();
-            cout << "\n\n";
+            cout << "\n";
             break;
         case '7':
             deleteTree(&tree);
