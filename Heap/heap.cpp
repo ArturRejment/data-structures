@@ -6,12 +6,6 @@ Heap::Heap()
 {
     this->size = 0;
     this->heap = nullptr;
-    cr = cl = cp = "  ";
-    cr[0] = 218;
-    cr[1] = 196;
-    cl[0] = 192;
-    cl[1] = 196;
-    cp[0] = 179;
 }
 
 // Print linear heap
@@ -46,22 +40,18 @@ bool Heap::findElement(int value)
 // Add element to the heap
 void Heap::insert(int value)
 {
-    if (heap == nullptr)
-    {
-
-        heap = new int[1];
-        heap[0] = value;
-        size++;
-
-        return;
-    }
-    size++;
+    int temp, temp2;
+    temp = size++;
     heap = (int *)realloc(heap, size * sizeof(int));
-    heap[size - 1] = value;
-    for (int i = size / 2 - 1; i >= 0; i--)
+    temp2 = (temp - 1) / 2;
+
+    while (temp > 0 && heap[temp2] < value)
     {
-        heapify(i);
+        heap[temp] = heap[temp2];
+        temp = temp2;
+        temp2 = (temp - 1) / 2;
     }
+    heap[temp] = value;
 }
 
 // Delete element from the heap
