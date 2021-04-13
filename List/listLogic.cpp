@@ -4,10 +4,10 @@
 #include "linkedList.cpp"
 
 // Delete old list and create new one
-void deleteList(LinkedList *list)
+void deleteList(LinkedList **list)
 {
-    LinkedList newList = LinkedList();
-    *list = newList;
+    delete *list;
+    *list = new LinkedList();
 }
 
 void fillLinkedListFromFile(LinkedList *list)
@@ -55,7 +55,7 @@ void fillLinkedListWithRandomData(LinkedList *list)
     }
 }
 
-void fillListForExperiment(LinkedList *list, int size, int range)
+void fillListForExperiment(LinkedList **list, int size, int range)
 {
 
     deleteList(list);
@@ -63,12 +63,12 @@ void fillListForExperiment(LinkedList *list, int size, int range)
     for (int i = 0; i < size; i++)
     {
         int value = rand() % range;
-        list->push_back(value);
+        (*list)->push_back(value);
     }
 }
 
 // Perform experiment on list
-void linkedListExperiment(LinkedList *list)
+void linkedListExperiment(LinkedList *&list)
 {
     srand(time(NULL));
     int size, value, testNumber, range;
@@ -87,7 +87,7 @@ void linkedListExperiment(LinkedList *list)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size, range);
+        fillListForExperiment(&list, size, range);
         value = rand() % range;
         Timer timer;
         list->push_back(value);
@@ -99,7 +99,7 @@ void linkedListExperiment(LinkedList *list)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size, range);
+        fillListForExperiment(&list, size, range);
         value = rand() % range;
         Timer timer;
         list->push_front(value);
@@ -112,7 +112,7 @@ void linkedListExperiment(LinkedList *list)
     int position;
     for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size, range);
+        fillListForExperiment(&list, size, range);
         value = rand() % range;
         position = rand() % (size - 1);
         Timer timer;
@@ -125,7 +125,7 @@ void linkedListExperiment(LinkedList *list)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size, range);
+        fillListForExperiment(&list, size, range);
         Timer timer;
         list->pop_back();
         time += timer.getTime().count() * 1000000000.0f;
@@ -136,7 +136,7 @@ void linkedListExperiment(LinkedList *list)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size, range);
+        fillListForExperiment(&list, size, range);
         position = rand() % (size - 1);
         Timer timer;
         list->deleteFromPos(position);
@@ -148,7 +148,7 @@ void linkedListExperiment(LinkedList *list)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size, range);
+        fillListForExperiment(&list, size, range);
         Timer timer;
         list->pop_front();
         time += timer.getTime().count() * 1000000000.0f;
@@ -159,7 +159,7 @@ void linkedListExperiment(LinkedList *list)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillListForExperiment(list, size, range);
+        fillListForExperiment(&list, size, range);
         value = rand() % range;
         Timer timer;
         list->findElement(value);

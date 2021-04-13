@@ -3,10 +3,10 @@
 #include "RBTree.cpp"
 
 // Delete the old tree and create new one
-void deleteTree(RBTree *tree)
+void deleteTree(RBTree **tree)
 {
-    RBTree newTree = RBTree();
-    *tree = newTree;
+    delete *tree;
+    *tree = new RBTree();
 }
 
 void fillTreeFromFile(RBTree *tree)
@@ -57,7 +57,7 @@ void fillTreeWithRandomData(RBTree *tree)
     }
 }
 
-void fillTreeForExperiment(RBTree *tree, int size, int range)
+void fillTreeForExperiment(RBTree **tree, int size, int range)
 {
     int value;
     deleteTree(tree);
@@ -65,12 +65,12 @@ void fillTreeForExperiment(RBTree *tree, int size, int range)
     for (int i = 0; i < size; i++)
     {
         value = rand() % range;
-        tree->insertElement(value);
+        (*tree)->insertElement(value);
     }
 }
 
 // Perform experiment on tree
-void treeExperiment(RBTree *tree)
+void treeExperiment(RBTree *&tree)
 {
     srand(time(NULL));
     int size, value, testNumber, range;
@@ -89,7 +89,7 @@ void treeExperiment(RBTree *tree)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillTreeForExperiment(tree, size, range);
+        fillTreeForExperiment(&tree, size, range);
         value = rand() % range;
         Timer timer;
         tree->insertElement(value);
@@ -102,7 +102,7 @@ void treeExperiment(RBTree *tree)
     RBNode *node;
     for (int i = 0; i < testNumber; i++)
     {
-        fillTreeForExperiment(tree, size, range);
+        fillTreeForExperiment(&tree, size, range);
         value = rand() % range;
         Timer timer;
         node = tree->find(value);
@@ -117,7 +117,7 @@ void treeExperiment(RBTree *tree)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillTreeForExperiment(tree, size, range);
+        fillTreeForExperiment(&tree, size, range);
         value = rand() % range;
         Timer timer;
         tree->find(value);

@@ -65,6 +65,8 @@ void Heap::insert(int value)
 // Delete element from the heap
 void Heap::deleteElement(int value)
 {
+    if (size == 0)
+        return;
     int i;
     for (i = 0; i < size; i++)
     {

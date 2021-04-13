@@ -7,10 +7,10 @@
 using namespace std;
 
 //* Structures Declaration
-LinkedList list = LinkedList();
+LinkedList *list = new LinkedList();
 Array *array = new Array();
-Heap heap = Heap();
-RBTree tree = RBTree();
+Heap *heap = new Heap();
+RBTree *tree = new RBTree();
 
 // The default menu will be printed in every testing menu
 void printDefaultMenu()
@@ -23,7 +23,7 @@ void printDefaultMenu()
     cout << "[6] Print structure\n";
     cout << "[7] Clear structure\n";
     cout << "[8] Return\n";
-    cout << "Press key with your choice" << flush;
+    cout << "Press key with your choice\n";
 }
 
 // Gets the value if necessary for the function
@@ -136,45 +136,45 @@ void listMenu()
         switch (choice)
         {
         case 'a':
-            list.push_front(askForValue());
+            list->push_front(askForValue());
             system("cls");
             break;
         case 'b':
             cout << "\nEnter position: ";
             cin >> pos;
-            list.insert(askForValue(), pos);
+            list->insert(askForValue(), pos);
             system("cls");
             break;
         case 'c':
-            list.pop_front();
+            list->pop_front();
             system("cls");
             break;
         case 'd':
             cout << "\nEnter position: ";
             cin >> pos;
-            list.deleteFromPos(pos);
+            list->deleteFromPos(pos);
             system("cls");
             break;
         case '1':
-            list.push_back(askForValue());
+            list->push_back(askForValue());
             system("cls");
             break;
         case '2':
-            list.pop_back();
+            list->pop_back();
             system("cls");
             break;
         case '3':
-            fillLinkedListWithRandomData(&list);
+            fillLinkedListWithRandomData(list);
             system("cls");
             break;
         case '4':
-            fillLinkedListFromFile(&list);
+            fillLinkedListFromFile(list);
             system("cls");
             break;
         case '5':
             system("cls");
             ListNode *elem;
-            elem = list.findElement(askForValue());
+            elem = list->findElement(askForValue());
             if (elem != nullptr)
                 elem->printData();
             else
@@ -182,13 +182,11 @@ void listMenu()
             break;
         case '6':
             system("cls");
-            list.printList();
+            list->printList();
             cout << "\n\n";
             break;
         case '7':
-            delete &list;
-            cout << " Deleted";
-            list = LinkedList();
+            deleteList(&list);
             system("cls");
             break;
         case '8':
@@ -215,28 +213,28 @@ void heapMenu()
         switch (choice)
         {
         case '1':
-            heap.insert(askForValue());
+            heap->insert(askForValue());
             system("cls");
             break;
         case '2':
-            heap.deleteElement(askForValue());
+            heap->deleteElement(askForValue());
             system("cls");
             break;
         case '3':
-            fillHeapWithRandomData(&heap);
+            fillHeapWithRandomData(heap);
             system("cls");
             break;
         case '4':
-            fillHeapFromFile(&heap);
+            fillHeapFromFile(heap);
             system("cls");
             break;
         case '5':
-            heap.findElement(askForValue());
+            heap->findElement(askForValue());
             system("cls");
             break;
         case '6':
             system("cls");
-            heap.printHeap();
+            heap->printHeap();
             cout << "\n\n";
             break;
         case '7':
@@ -269,24 +267,24 @@ void treeMenu()
         switch (choice)
         {
         case '1':
-            tree.insertElement(askForValue());
+            tree->insertElement(askForValue());
             system("cls");
             break;
         case '2':
-            tree.deleteElement(tree.find(askForValue()));
+            tree->deleteElement(tree->find(askForValue()));
             system("cls");
             break;
         case '3':
-            fillTreeWithRandomData(&tree);
+            fillTreeWithRandomData(tree);
             system("cls");
             break;
         case '4':
-            fillTreeFromFile(&tree);
+            fillTreeFromFile(tree);
             system("cls");
             break;
         case '5':
             RBNode *temp;
-            temp = tree.find(askForValue());
+            temp = tree->find(askForValue());
             if (temp != nullptr)
                 cout << "Found element!\n";
             else
@@ -295,7 +293,7 @@ void treeMenu()
             break;
         case '6':
             system("cls");
-            tree.inorder();
+            tree->inorder();
             cout << "\n\n";
             break;
         case '7':
@@ -336,17 +334,17 @@ void printExperimentMenu()
             break;
         case '2':
             system("cls");
-            linkedListExperiment(&list);
+            linkedListExperiment(list);
 
             break;
         case '3':
             system("cls");
-            heapExperiment(&heap);
+            heapExperiment(heap);
 
             break;
         case '4':
             system("cls");
-            treeExperiment(&tree);
+            treeExperiment(tree);
 
             break;
         case '5':
@@ -354,11 +352,11 @@ void printExperimentMenu()
             cout << "\nARRAY:\n";
             arrayExperiment(array);
             cout << "\nLIST:\n";
-            linkedListExperiment(&list);
+            linkedListExperiment(list);
             cout << "\nHEAP:\n";
-            heapExperiment(&heap);
+            heapExperiment(heap);
             cout << "TREE:\n";
-            treeExperiment(&tree);
+            treeExperiment(tree);
 
             break;
         case '6':

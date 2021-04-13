@@ -2,10 +2,10 @@
 #include <time.h>
 #include "heap.cpp"
 
-void deleteHeap(Heap *heap)
+void deleteHeap(Heap **heap)
 {
-    Heap newHeap = Heap();
-    *heap = newHeap;
+    delete *heap;
+    *heap = new Heap();
 }
 
 void fillHeapFromFile(Heap *heap)
@@ -56,7 +56,7 @@ void fillHeapWithRandomData(Heap *heap)
     }
 }
 
-void fillHeapForExperiment(Heap *heap, int size, int range)
+void fillHeapForExperiment(Heap **heap, int size, int range)
 {
 
     deleteHeap(heap);
@@ -64,12 +64,12 @@ void fillHeapForExperiment(Heap *heap, int size, int range)
     for (int i = 0; i < size; i++)
     {
         int value = rand() % range;
-        heap->insert(value);
+        (*heap)->insert(value);
     }
 }
 
 // Perform experiment on heap
-void heapExperiment(Heap *heap)
+void heapExperiment(Heap *&heap)
 {
     srand(time(NULL));
     int size, value, testNumber, range;
@@ -88,7 +88,7 @@ void heapExperiment(Heap *heap)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillHeapForExperiment(heap, size, range);
+        fillHeapForExperiment(&heap, size, range);
         value = rand() % range;
         Timer timer;
         heap->insert(value);
@@ -100,7 +100,7 @@ void heapExperiment(Heap *heap)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillHeapForExperiment(heap, size, range);
+        fillHeapForExperiment(&heap, size, range);
         value = rand() % range;
         Timer timer;
         heap->deleteElement(value);
@@ -112,7 +112,7 @@ void heapExperiment(Heap *heap)
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
-        fillHeapForExperiment(heap, size, range);
+        fillHeapForExperiment(&heap, size, range);
         value = rand() % range;
         Timer timer;
         heap->findElement(value);
