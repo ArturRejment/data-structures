@@ -15,6 +15,12 @@ void fillArrayFromFile(Array *array)
     fstream file;
     file.open("./data.txt", ios::in);
 
+    if (array->getSize() > 0)
+    {
+        cout << "Array is not empty!\n";
+        return;
+    }
+
     if (!file.is_open())
     {
         cout << "[Array] Cannot open data.txt\n";
@@ -41,7 +47,7 @@ void fillArrayWithRandomData(Array *array)
 {
     if (array->getSize() > 0)
     {
-        cout << "Array is not empty!";
+        cout << "Array is not empty!\n";
         return;
     }
 

@@ -13,11 +13,11 @@ public:
     Heap();
     bool isEmpty();
     int getMax();
-    void insert(int value);
+    void insert(int);
     void printHeap();
     void shiftUp(int i);
     void shiftDown(int i);
     void heapify(int i);
     void deleteElement(int);
-    void findElement(int);
+    bool findElement(int);
 };

@@ -93,7 +93,10 @@ void arrayMenu()
             break;
         case '5':
             system("cls");
-            array->findElement(askForValue());
+            if (array->findElement(askForValue()))
+                cout << "Found element!\n";
+            else
+                cout << "Element is not in the structure\n";
             break;
         case '6':
             system("cls");
@@ -233,7 +236,10 @@ void heapMenu()
             break;
         case '5':
             system("cls");
-            heap->findElement(askForValue());
+            if (heap->findElement(askForValue()))
+                cout << "Found element!\n";
+            else
+                cout << "Element is not in the structure\n";
             break;
         case '6':
             system("cls");
@@ -354,13 +360,13 @@ void printExperimentMenu()
             break;
         case '5':
             system("cls");
-            cout << "\nARRAY:\n";
+            cout << "ARRAY:\n";
             arrayExperiment(array);
             cout << "\nLIST:\n";
             linkedListExperiment(list);
             cout << "\nHEAP:\n";
             heapExperiment(heap);
-            cout << "TREE:\n";
+            cout << "\nTREE:\n";
             treeExperiment(tree);
 
             break;

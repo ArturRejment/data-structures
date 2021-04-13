@@ -22,15 +22,16 @@ bool Array::isEmpty()
     return false;
 }
 
-void Array::findElement(int value)
+bool Array::findElement(int value)
 {
     for (int i = 0; i < size; i++)
     {
         if (array[i] == value)
         {
-            return;
+            return true;
         }
     }
+    return false;
 }
 
 int Array::getSize()

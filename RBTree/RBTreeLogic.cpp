@@ -15,6 +15,12 @@ void fillTreeFromFile(RBTree *tree)
     fstream file;
     file.open("./data.txt", ios::in);
 
+    if (!tree->isEmpty())
+    {
+        cout << "Red-Black Tree is not empty!\n";
+        return;
+    }
+
     if (!file.is_open())
     {
         cout << "[Red-Black Tree] Cannot open data.txt\n";

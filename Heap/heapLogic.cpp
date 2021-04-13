@@ -14,6 +14,12 @@ void fillHeapFromFile(Heap *heap)
     fstream file;
     file.open("./data.txt", ios::in);
 
+    if (!heap->isEmpty())
+    {
+        cout << "Heap is not empty!\n";
+        return;
+    }
+
     if (!file.is_open())
     {
         cout << "[Heap] Cannot open data.txt\n";

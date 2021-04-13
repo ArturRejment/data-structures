@@ -13,7 +13,7 @@ public:
     void deleteElement(int);
     void deleteFromTheEnd();
     void deleteFromTheBeginning();
-    void findElement(int);
+    bool findElement(int);
     void printArray();
     int getSize();
     bool isEmpty();

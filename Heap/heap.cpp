@@ -17,9 +17,10 @@ Heap::Heap()
 // Print linear heap
 void Heap::printHeap()
 {
+    cout << "Heap :";
     for (int i = 0; i < size; i++)
     {
-        cout << heap[i] << "\n";
+        cout << heap[i] << " ";
     }
 }
 
@@ -30,15 +31,16 @@ bool Heap::isEmpty()
     return false;
 }
 
-void Heap::findElement(int value)
+bool Heap::findElement(int value)
 {
     for (int i = 0; i < size; i++)
     {
         if (heap[i] == value)
         {
-            return;
+            return true;
         }
     }
+    return false;
 }
 
 // Add element to the heap
@@ -75,7 +77,7 @@ void Heap::deleteElement(int value)
     }
 
     swap(heap[i], heap[size - 1]);
-    size -= 1;
+    size--;
     for (int i = size / 2 - 1; i >= 0; i--)
     {
         heapify(i);

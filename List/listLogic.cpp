@@ -15,6 +15,13 @@ void fillLinkedListFromFile(LinkedList *list)
     // Open file and check if it opened with success
     fstream file;
     file.open("./data.txt", ios::in);
+
+    if (!list->isEmpty())
+    {
+        cout << "List is not empty!\n";
+        return;
+    }
+
     if (!file.is_open())
     {
         cout << "[LinkedList] Cannot open data.txt\n";
@@ -41,7 +48,7 @@ void fillLinkedListWithRandomData(LinkedList *list)
 {
     if (!list->isEmpty())
     {
-        cout << "List is not empty!";
+        cout << "List is not empty!\n";
         return;
     }
 
