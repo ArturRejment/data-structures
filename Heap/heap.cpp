@@ -14,6 +14,7 @@ Heap::Heap()
     cp[0] = 179;
 }
 
+// Print linear heap
 void Heap::printHeap()
 {
     for (int i = 0; i < size; i++)
@@ -35,14 +36,12 @@ void Heap::findElement(int value)
     {
         if (heap[i] == value)
         {
-            cout << "Found " << value << " element\n";
             return;
         }
     }
-    cout << "Element "
-         << " is not i heap\n";
 }
 
+// Add element to the heap
 void Heap::insert(int value)
 {
     if (heap == nullptr)
@@ -63,6 +62,7 @@ void Heap::insert(int value)
     }
 }
 
+// Delete element from the heap
 void Heap::deleteElement(int value)
 {
     int i;
@@ -82,21 +82,22 @@ void Heap::deleteElement(int value)
     heap = (int *)realloc(heap, size * sizeof(int));
 }
 
+// Restore the heap properties
 void Heap::heapify(int i)
 {
     if (size == 1)
     {
-        printf("Single element in the heap");
+        return;
     }
     else
     {
         int largest = i;
-        int l = 2 * i + 1;
-        int r = 2 * i + 2;
-        if (l < size && heap[l] > heap[largest])
-            largest = l;
-        if (r < size && heap[r] > heap[largest])
-            largest = r;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        if (left < size && heap[left] > heap[largest])
+            largest = left;
+        if (right < size && heap[right] > heap[largest])
+            largest = right;
         if (largest != i)
         {
             swap(heap[i], heap[largest]);

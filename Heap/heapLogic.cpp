@@ -10,6 +10,7 @@ void deleteHeap(Heap *heap)
 
 void fillHeapFromFile(Heap *heap)
 {
+    // Open file and check if it opened with success
     fstream file;
     file.open("data.txt", ios::in);
 
@@ -21,8 +22,10 @@ void fillHeapFromFile(Heap *heap)
 
     int size;
     int data;
+    // First data is the size
     file >> size;
 
+    // All the next values are elements
     while ((!file.eof()))
     {
         file >> data;
@@ -30,6 +33,7 @@ void fillHeapFromFile(Heap *heap)
     }
 }
 
+// Fill heap with random values for testing
 void fillHeapWithRandomData(Heap *heap)
 {
     srand(time(NULL));
@@ -44,19 +48,19 @@ void fillHeapWithRandomData(Heap *heap)
     cout << "Enter the size of the heap: " << flush;
     cin >> size;
 
+    // Fill heap with random values
     for (int i = 0; i < size; i++)
     {
-        int value = rand() % 300;
+        int value = rand();
         heap->insert(value);
     }
 }
 
 void fillHeapForExperiment(Heap *heap, int size, int range)
 {
-    if (!heap->isEmpty())
-    {
-        deleteHeap(heap);
-    }
+
+    deleteHeap(heap);
+
     for (int i = 0; i < size; i++)
     {
         int value = rand() % range;
@@ -64,6 +68,7 @@ void fillHeapForExperiment(Heap *heap, int size, int range)
     }
 }
 
+// Perform experiment on heap
 void heapExperiment(Heap *heap)
 {
     srand(time(NULL));

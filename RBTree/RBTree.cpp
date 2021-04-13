@@ -35,6 +35,7 @@ bool RBTree::isEmpty()
     return false;
 }
 
+// Get the sibling of the particular node
 RBNode *RBTree::getSibling(RBNode *node)
 {
     if (node->parent == nullptr)
@@ -49,6 +50,7 @@ RBNode *RBTree::getSibling(RBNode *node)
     return node->parent->leftChild;
 }
 
+// Find the node in the tree by value
 RBNode *RBTree::find(int value)
 {
     RBNode *temp;
@@ -70,6 +72,7 @@ RBNode *RBTree::find(int value)
     return temp;
 }
 
+// Find minimum value in the tree
 RBNode *RBTree::findMin(RBNode *nodeToFind)
 {
     if (nodeToFind != nullptr)
@@ -82,16 +85,19 @@ RBNode *RBTree::findMin(RBNode *nodeToFind)
     return nodeToFind;
 }
 
+// Find the successor of the given node
 RBNode *RBTree::findSuccessor(RBNode *node)
 {
     RBNode *temp;
 
     if (node != nullptr)
     {
+        // If there is right son, return the minimum value in right subtree
         if (node->rightChild != nullptr)
         {
             return findMin(node->rightChild);
         }
+        // If there is no right son serch as long as we comr from right size
         else
         {
             temp = node->parent;
@@ -106,6 +112,7 @@ RBNode *RBTree::findSuccessor(RBNode *node)
     return nullptr;
 }
 
+// Perform left rotation on the given node
 void RBTree::leftRotation(RBNode *rotatingNode)
 {
     RBNode *rightChildOfRotatingNode = rotatingNode->rightChild, *tempParent = rotatingNode->parent;
@@ -132,6 +139,7 @@ void RBTree::leftRotation(RBNode *rotatingNode)
     }
 }
 
+// Perform right rotation on the given node
 void RBTree::rightRotation(RBNode *rotatingNode)
 {
     RBNode *leftOfRotatingNode = rotatingNode->leftChild, *tempParent = rotatingNode->parent;
@@ -158,40 +166,29 @@ void RBTree::rightRotation(RBNode *rotatingNode)
     }
 }
 
-RBNode *getSibling(RBNode *node)
-{
-    if (node->parent == nullptr)
-        return nullptr;
-
-    if (node == node->parent->leftChild)
-        return node->parent->rightChild;
-    return node->parent->leftChild;
-}
-
-// deletes the given node
+// Deletes the given node
 void RBTree::deleteElement(RBNode *deletingNode)
 {
-    RBNode *u;
+    RBNode *helperNode;
     if (deletingNode->leftChild != nullptr and deletingNode->rightChild != nullptr)
-        u = findSuccessor(deletingNode->rightChild);
+        helperNode = findSuccessor(deletingNode->rightChild);
 
-    // when leaf
+    // When deleting node is a leaf
     if (deletingNode->leftChild == nullptr and deletingNode->rightChild == nullptr)
-        u = nullptr;
+        helperNode = nullptr;
 
-    // when single child
+    // When deleting node has single child
     if (deletingNode->leftChild != nullptr)
-        u = deletingNode->leftChild;
+        helperNode = deletingNode->leftChild;
     else
-        u = deletingNode->rightChild;
+        helperNode = deletingNode->rightChild;
 
-    // True when u and deletingNode are both black
-    bool uvBlack = ((u == nullptr or u->color == BLACK) and (deletingNode->color == BLACK));
+    // Returns true when both both deletingNode and helperNode are black
+    bool areBothBlack = ((helperNode == nullptr or helperNode->color == BLACK) and (deletingNode->color == BLACK));
     RBNode *parent = deletingNode->parent;
 
-    if (u == nullptr)
+    if (helperNode == nullptr)
     {
-        // u is nullptr therefore deletingNode is leaf
         if (deletingNode == root)
         {
             // deletingNode is root, making root null
@@ -199,21 +196,20 @@ void RBTree::deleteElement(RBNode *deletingNode)
         }
         else
         {
-            if (uvBlack)
+            if (areBothBlack)
             {
-                // u and deletingNode both black
                 // deletingNode is leaf, fix double black at deletingNode
                 fixDoubleBlack(deletingNode);
             }
             else
             {
-                // u or deletingNode is red
+                // helperNode or deletingNode is red
                 if (getSibling(deletingNode) != nullptr)
-                    // sibling is not null, make it red"
+                    // Sibling is not null, make it red
                     getSibling(deletingNode)->color = RED;
             }
 
-            // delete deletingNode from the tree
+            // Delete deletingNode from the tree
             if (deletingNode == deletingNode->parent->leftChild)
             {
                 parent->leftChild = nullptr;
@@ -232,41 +228,40 @@ void RBTree::deleteElement(RBNode *deletingNode)
         // deletingNode has 1 child
         if (deletingNode == root)
         {
-            // deletingNode is root, assign the value of u to deletingNode, and delete u
-            deletingNode->data = u->data;
+            // deletingNode is root
+            deletingNode->data = helperNode->data;
             deletingNode->leftChild = deletingNode->rightChild = nullptr;
-            delete u;
+            delete helperNode;
         }
         else
         {
-            // Detach deletingNode from tree and move u up
             if (deletingNode == deletingNode->parent->leftChild)
             {
-                parent->leftChild = u;
+                parent->leftChild = helperNode;
             }
             else
             {
-                parent->rightChild = u;
+                parent->rightChild = helperNode;
             }
             delete deletingNode;
-            u->parent = parent;
-            if (uvBlack)
+            helperNode->parent = parent;
+            if (areBothBlack)
             {
-                // u and deletingNode both black, fix double black at u
-                fixDoubleBlack(u);
+                // Fix double black at helperNode
+                fixDoubleBlack(helperNode);
             }
             else
             {
-                // u or deletingNode red, color u black
-                u->color = BLACK;
+                // helperNode or deletingNode red, color helperNode black
+                helperNode->color = BLACK;
             }
         }
         return;
     }
 
     // deletingNode has 2 children, swap values with successor and recurse
-    swap(u->data, deletingNode->data);
-    deleteElement(u);
+    swap(helperNode->data, deletingNode->data);
+    deleteElement(helperNode);
 }
 
 void RBTree::fixDoubleBlack(RBNode *x)
@@ -285,39 +280,35 @@ void RBTree::fixDoubleBlack(RBNode *x)
     {
         if (sibling->color == RED)
         {
-            // Sibling red
+            // Sibling is red
             parent->color = RED;
             sibling->color = BLACK;
             if (sibling == sibling->parent->leftChild)
             {
-                // leftChild case
                 rightRotation(parent);
             }
             else
             {
-                // rightChild case
                 leftRotation(parent);
             }
             fixDoubleBlack(x);
         }
         else
         {
-            // Sibling black
+            // Sibling is black
             if ((sibling->leftChild != nullptr && sibling->leftChild->color == RED) || (sibling->rightChild != nullptr && sibling->rightChild->color == RED))
             {
-                // at least 1 red children
+                // There is at least one red child
                 if (sibling->leftChild != nullptr and sibling->leftChild->color == RED)
                 {
                     if (sibling == sibling->parent->leftChild)
                     {
-                        // leftChild leftChild
                         sibling->leftChild->color = sibling->color;
                         sibling->color = parent->color;
                         rightRotation(parent);
                     }
                     else
                     {
-                        // rightChild leftChild
                         sibling->leftChild->color = parent->color;
                         rightRotation(sibling);
                         leftRotation(parent);
@@ -327,14 +318,12 @@ void RBTree::fixDoubleBlack(RBNode *x)
                 {
                     if (sibling == sibling->parent->leftChild)
                     {
-                        // leftChild rightChild
                         sibling->rightChild->color = parent->color;
                         leftRotation(sibling);
                         rightRotation(parent);
                     }
                     else
                     {
-                        // rightChild rightChild
                         sibling->rightChild->color = sibling->color;
                         sibling->color = parent->color;
                         leftRotation(parent);
@@ -355,12 +344,16 @@ void RBTree::fixDoubleBlack(RBNode *x)
     }
 }
 
+// Helper for the element insertion
 void RBTree::insertElement(int value)
 {
+    // Create new node with value
     RBNode *newNode = new RBNode(value);
 
+    // Insert this node like to the normal BST
     root = insertElementNormalBST(root, newNode);
 
+    // Restore the red-black tree properties
     restoreRBTreeProperties(newNode);
 }
 

@@ -30,21 +30,25 @@ private:
 
 public:
     RBTree();
-    void print();
     void inorder();
     bool isEmpty();
     RBNode *find(int k);
     RBNode *findMin(RBNode *node);
     RBNode *findSuccessor(RBNode *node);
     RBNode *getRoot();
+    // Rotations
     void leftRotation(RBNode *node);
     void rightRotation(RBNode *node);
+    // Inserting
     void insertElement(int value);
     RBNode *insertElementNormalBST(RBNode *root, RBNode *node);
     void restoreRBTreeProperties(RBNode *&node);
+    // Deleting
     void deleteElement(RBNode *);
     RBNode *getSibling(RBNode *);
     void fixDoubleBlack(RBNode *);
     void deleteTree(RBNode *node);
+    // Printing
     void inorderH(string, string, RBNode *);
+    void print();
 };

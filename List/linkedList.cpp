@@ -40,6 +40,7 @@ void LinkedList::printList()
     }
 }
 
+// Add element at the end
 void LinkedList::push_back(int data)
 {
     ListNode *newNode = new ListNode(data);
@@ -55,6 +56,7 @@ void LinkedList::push_back(int data)
     }
 }
 
+// Add element at the beginning
 void LinkedList::push_front(int data)
 {
     ListNode *newNode = new ListNode(data);
@@ -70,6 +72,7 @@ void LinkedList::push_front(int data)
     }
 }
 
+// Delete element from the position
 void LinkedList::deleteFromPos(int position)
 {
 
@@ -82,16 +85,19 @@ void LinkedList::deleteFromPos(int position)
     pop_node(temp);
 }
 
+// Pop the last node
 void LinkedList::pop_back()
 {
     pop_node(tail);
 }
 
+// Pop the first node
 void LinkedList::pop_front()
 {
     pop_node(head);
 }
 
+// Insert element at the position
 void LinkedList::insert(int value, int position)
 {
 
@@ -117,6 +123,7 @@ void LinkedList::insert(int value, int position)
     }
 }
 
+// Delete the particular node
 void LinkedList::pop_node(ListNode *node)
 {
     if (node == nullptr)

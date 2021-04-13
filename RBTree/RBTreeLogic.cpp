@@ -2,6 +2,7 @@
 #include <time.h>
 #include "RBTree.cpp"
 
+// Delete the old tree and create new one
 void deleteTree(RBTree *tree)
 {
     RBTree newTree = RBTree();
@@ -10,6 +11,7 @@ void deleteTree(RBTree *tree)
 
 void fillTreeFromFile(RBTree *tree)
 {
+    // Open file and check if it opened with success
     fstream file;
     file.open("data.txt", ios::in);
 
@@ -21,8 +23,10 @@ void fillTreeFromFile(RBTree *tree)
 
     int size;
     int data;
+    // First data is the size
     file >> size;
 
+    // All the next values are elements
     while ((!file.eof()))
     {
         file >> data;
@@ -30,6 +34,7 @@ void fillTreeFromFile(RBTree *tree)
     }
 }
 
+// Fill tree with random values fot testing
 void fillTreeWithRandomData(RBTree *tree)
 {
     srand(time(NULL));
@@ -44,9 +49,10 @@ void fillTreeWithRandomData(RBTree *tree)
     cout << "Enter the size of the tree: " << flush;
     cin >> size;
 
+    // Fill tree with random values
     for (int i = 0; i < size; i++)
     {
-        int value = rand() % 300;
+        int value = rand();
         tree->insertElement(value);
     }
 }
@@ -54,10 +60,7 @@ void fillTreeWithRandomData(RBTree *tree)
 void fillTreeForExperiment(RBTree *tree, int size, int range)
 {
     int value;
-    if (!tree->isEmpty())
-    {
-        deleteTree(tree);
-    }
+    deleteTree(tree);
 
     for (int i = 0; i < size; i++)
     {
@@ -66,13 +69,14 @@ void fillTreeForExperiment(RBTree *tree, int size, int range)
     }
 }
 
+// Perform experiment on tree
 void treeExperiment(RBTree *tree)
 {
     srand(time(NULL));
     int size, value, testNumber, range;
     float time;
 
-    cout << "\nPlease enter the size of the red-black tree: " << flush;
+    cout << "Please enter the size of the red-black tree: " << flush;
     cin >> size;
 
     cout << "Please enter number of tests: " << flush;

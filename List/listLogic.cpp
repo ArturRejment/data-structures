@@ -3,6 +3,7 @@
 #include <fstream>
 #include "linkedList.cpp"
 
+// Delete old list and create new one
 void deleteList(LinkedList *list)
 {
     LinkedList newList = LinkedList();
@@ -11,6 +12,7 @@ void deleteList(LinkedList *list)
 
 void fillLinkedListFromFile(LinkedList *list)
 {
+    // Open file and check if it opened with success
     fstream file;
     file.open("data.txt", ios::in);
     if (!file.is_open())
@@ -21,8 +23,10 @@ void fillLinkedListFromFile(LinkedList *list)
 
     int size;
     int data;
+    // First data is the size
     file >> size;
 
+    // All the next values are elements
     while (!file.eof())
     {
         file >> data;
@@ -30,10 +34,9 @@ void fillLinkedListFromFile(LinkedList *list)
     }
 }
 
+// Fill list with random values for testing
 void fillLinkedListWithRandomData(LinkedList *list)
 {
-    srand(time(NULL));
-
     if (!list->isEmpty())
     {
         cout << "List is not empty!";
@@ -44,23 +47,19 @@ void fillLinkedListWithRandomData(LinkedList *list)
     cout << "Enter the size of the list: " << flush;
     cin >> size;
 
-    float time = 0;
-
+    // Fill list with random values
     for (int i = 0; i < size; i++)
     {
-        int value = rand() % 300;
+        int value = rand();
         list->push_back(value);
     }
 }
 
 void fillListForExperiment(LinkedList *list, int size, int range)
 {
-    srand(time(NULL));
 
-    if (!list->isEmpty())
-    {
-        deleteList(list);
-    }
+    deleteList(list);
+
     for (int i = 0; i < size; i++)
     {
         int value = rand() % range;
@@ -68,6 +67,7 @@ void fillListForExperiment(LinkedList *list, int size, int range)
     }
 }
 
+// Perform experiment on list
 void linkedListExperiment(LinkedList *list)
 {
     srand(time(NULL));
@@ -113,7 +113,7 @@ void linkedListExperiment(LinkedList *list)
     for (int i = 0; i < testNumber; i++)
     {
         fillListForExperiment(list, size, range);
-        value = rand() % 100000;
+        value = rand() % range;
         position = rand() % (size - 1);
         Timer timer;
         list->insert(value, position);
@@ -121,7 +121,7 @@ void linkedListExperiment(LinkedList *list)
     }
     cout << "Inserting element at the random position of the double linked list took on average: " << time / testNumber << " ns\n";
 
-    //! Deletion element form the end
+    //! Delete element form the end
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
@@ -132,18 +132,19 @@ void linkedListExperiment(LinkedList *list)
     }
     cout << "Deleting element from the end of the double linked list took on average: " << time / testNumber << " ns\n";
 
-    //! Deletion element fotm the position
+    //! Delete element fotm the position
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {
         fillListForExperiment(list, size, range);
-        position = rand() & (size - 1);
+        position = rand() % (size - 1);
         Timer timer;
         list->deleteFromPos(position);
         time += timer.getTime().count() * 1000000000.0f;
     }
+    cout << "Deleting element from the random position of the doule linked list took on average: " << time / testNumber << " ns\n";
 
-    //! Deletion element form the beginning
+    //! Delete element form the beginning
     time = 0;
     for (int i = 0; i < testNumber; i++)
     {

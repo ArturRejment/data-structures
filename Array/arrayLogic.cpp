@@ -2,6 +2,7 @@
 #include <math.h>
 #include "array.cpp"
 
+// Delete old array and create new one
 void deleteArray(Array **array)
 {
     delete *array;
@@ -10,6 +11,7 @@ void deleteArray(Array **array)
 
 void fillArrayFromFile(Array *array)
 {
+    // Open file and check if it opened with success
     fstream file;
     file.open("data.txt", ios::in);
 
@@ -21,8 +23,10 @@ void fillArrayFromFile(Array *array)
 
     int size;
     int data;
+    // First data is the size
     file >> size;
 
+    // All the next values are elements
     while ((!file.eof()))
     {
         file >> data;
@@ -30,6 +34,7 @@ void fillArrayFromFile(Array *array)
     }
 }
 
+// Fill array with random values for testing
 void fillArrayWithRandomData(Array *array)
 {
     if (array->getSize() > 0)
@@ -42,9 +47,10 @@ void fillArrayWithRandomData(Array *array)
     cout << "Enter the size of the array: " << flush;
     cin >> size;
 
+    // Fill array with random values
     for (int i = 0; i < size; i++)
     {
-        int value = rand() % 300;
+        int value = rand();
         array->addElement(value);
     }
 }
@@ -59,6 +65,7 @@ void fillArrayforExperiment(Array **array, int size, int range)
     }
 }
 
+// Perform experiment on array
 void arrayExperiment(Array *&array)
 {
     srand(time(NULL));

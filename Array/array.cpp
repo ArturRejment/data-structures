@@ -38,6 +38,7 @@ int Array::getSize()
     return this->size;
 }
 
+// Add element at the end of the array
 void Array::addElement(int value)
 {
     size++;

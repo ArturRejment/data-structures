@@ -12,6 +12,7 @@ Array *array = new Array();
 Heap heap = Heap();
 RBTree tree = RBTree();
 
+// The default menu will be printed in every testing menu
 void printDefaultMenu()
 {
     cout << "[1] Add element\n";
@@ -25,6 +26,7 @@ void printDefaultMenu()
     cout << "Press key with your choice" << flush;
 }
 
+// Gets the value if necessary for the function
 int askForValue()
 {
     int val;
@@ -33,6 +35,7 @@ int askForValue()
     return val;
 }
 
+// Testing menu for array
 void arrayMenu()
 {
     system("cls");
@@ -57,7 +60,7 @@ void arrayMenu()
             system("cls");
             break;
         case 'b':
-            cout << "Enter position: ";
+            cout << "\nEnter position: ";
             cin >> pos;
             array->addElementOnPosition(askForValue(), pos);
             system("cls");
@@ -67,7 +70,7 @@ void arrayMenu()
             system("cls");
             break;
         case 'd':
-            cout << "Enter position: ";
+            cout << "\nEnter position: ";
             cin >> pos;
             array->deleteElement(pos);
             system("cls");
@@ -100,7 +103,6 @@ void arrayMenu()
         case '7':
             deleteArray(&array);
             system("cls");
-            cout << "pls delete";
             break;
         case '8':
             system("cls");
@@ -114,6 +116,7 @@ void arrayMenu()
     } while (true);
 }
 
+// Testing menu for list
 void listMenu()
 {
     system("cls");
@@ -137,7 +140,7 @@ void listMenu()
             system("cls");
             break;
         case 'b':
-            cout << "Enter position: ";
+            cout << "\nEnter position: ";
             cin >> pos;
             list.insert(askForValue(), pos);
             system("cls");
@@ -147,7 +150,7 @@ void listMenu()
             system("cls");
             break;
         case 'd':
-            cout << "Enter position: ";
+            cout << "\nEnter position: ";
             cin >> pos;
             list.deleteFromPos(pos);
             system("cls");
@@ -169,13 +172,13 @@ void listMenu()
             system("cls");
             break;
         case '5':
+            system("cls");
             ListNode *elem;
             elem = list.findElement(askForValue());
             if (elem != nullptr)
                 elem->printData();
             else
-                cout << "Element " << val << " is not in the List" << endl;
-            system("cls");
+                cout << "Element is not in the list" << endl;
             break;
         case '6':
             system("cls");
@@ -197,6 +200,7 @@ void listMenu()
     } while (true);
 }
 
+// Testing menu for heap
 void heapMenu()
 {
     system("cls");
@@ -249,16 +253,18 @@ void heapMenu()
     } while (true);
 }
 
+// Testing menu for RB tree
 void treeMenu()
 {
+    char choice;
+    int val;
     system("cls");
     do
     {
         cout << "------------- RED-BLACK TREE MENU -------------" << endl;
         printDefaultMenu();
 
-        char choice = getch();
-        int val;
+        choice = getch();
 
         switch (choice)
         {
@@ -282,9 +288,9 @@ void treeMenu()
             RBNode *temp;
             temp = tree.find(askForValue());
             if (temp != nullptr)
-                cout << "Found " << val;
+                cout << "Found element!\n";
             else
-                cout << "Element " << val << " is not in the structure\n";
+                cout << "Element is not in the structure\n";
             system("cls");
             break;
         case '6':
@@ -295,6 +301,7 @@ void treeMenu()
         case '7':
             deleteTree(&tree);
             system("cls");
+            cout << "Deleted!\n";
             break;
         case '8':
             return;
@@ -344,11 +351,11 @@ void printExperimentMenu()
             break;
         case '5':
             system("cls");
-            cout << "ARRAY:\n";
+            cout << "\nARRAY:\n";
             arrayExperiment(array);
-            cout << "LIST:\n";
+            cout << "\nLIST:\n";
             linkedListExperiment(&list);
-            cout << "HEAP:\n";
+            cout << "\nHEAP:\n";
             heapExperiment(&heap);
             cout << "TREE:\n";
             treeExperiment(&tree);
@@ -365,9 +372,9 @@ void printExperimentMenu()
 
 void printTestingMenu()
 {
+    char choice;
     do
     {
-        char choice;
         system("cls");
 
         cout << "------------- TESTING MENU -------------" << endl;
@@ -402,8 +409,10 @@ void printTestingMenu()
     } while (true);
 }
 
+// Menu for selecting program mode
 void selectMode()
 {
+    char choice;
     system("cls");
     do
     {
@@ -413,7 +422,7 @@ void selectMode()
         cout << "[3] Exit program\n";
         cout << "Press key with your choice\n";
 
-        char choice = getch();
+        choice = getch();
         switch (choice)
         {
         case '1':
